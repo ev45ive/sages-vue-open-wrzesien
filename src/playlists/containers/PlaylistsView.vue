@@ -5,16 +5,11 @@
         <PlaylistList
           :playlists="playlists"
           @select="selectPlaylistById($event)"
-        /> 
+        />
       </div>
       <div class="col">
-
-        {{ selected.name }}
-        <button class="btn btn-danger" @click="showDetails">Cancel</button>
-        <button class="btn btn-primary" @click="showEditor">Edit</button>
-
         <PlaylistDetails :playlist="selected" v-if="mode === 'details'" />
-        <PlaylistEditor  :playlist="selected" v-else-if="mode === 'editor'" />
+        <PlaylistEditor :playlist="selected" v-else-if="mode === 'editor'" />
       </div>
     </div>
   </div>
@@ -37,8 +32,12 @@ const selectPlaylistById = (id: string) => {
   selected.value = playlists.value.find((p) => p.id === id)!;
 };
 
+// TODO: Connect buttons
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
+const savePlaylist = (draft: Playlist) => {
+  mode.value = "editor";
+};
 </script>
 
 <style scoped></style>

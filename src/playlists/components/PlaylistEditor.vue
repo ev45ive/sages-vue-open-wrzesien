@@ -35,19 +35,19 @@
           v-model="playlist.description"
         ></textarea>
       </div>
+
+      <button class="btn btn-danger" @click="0">Cancel</button>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { Playlist } from '../../common/model/Playlist';
-
+import { Playlist } from "../../common/model/Playlist";
 
 defineProps<{
   playlist: Playlist;
 }>();
-
 </script>
 
 <style scoped></style>

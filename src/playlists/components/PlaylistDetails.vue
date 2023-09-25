@@ -12,6 +12,8 @@
       <dt>Description</dt>
       <dd>{{ playlist.description }}</dd>
     </dl>
+
+    <button class="btn btn-primary" @click="0">Edit</button>
   </div>
 </template>
 
@@ -21,8 +23,6 @@ import { Playlist } from "../../common/model/Playlist";
 defineProps<{
   playlist: Playlist;
 }>();
-
-
 </script>
 
 <style scoped>
