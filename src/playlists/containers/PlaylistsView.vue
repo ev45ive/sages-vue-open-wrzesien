@@ -5,15 +5,11 @@
         <PlaylistList
           :playlists="playlists"
           @select="selectPlaylistById($event)"
-        />
-
-        <!-- <input
-          type="text"
-          :value="selected.name"
-          @keydown="($event.target as HTMLInputElement).value"
-        /> -->
+        /> 
       </div>
       <div class="col">
+
+        {{ selected.name }}
         <button class="btn btn-danger" @click="showDetails">Cancel</button>
         <button class="btn btn-primary" @click="showEditor">Edit</button>
 
