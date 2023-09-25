@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, toRef, toRefs } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 
 // defineProps(['playlists'])
@@ -28,9 +28,16 @@ import { Playlist } from "../../common/model/Playlist";
 //     type: Array as PropType<Playlist[]>,
 //   },
 // });
+
 const props = defineProps<{ playlists: Playlist[] }>();
 
-props.playlists; // Not-Reactive!
+// const playlists = props.playlists; // Not-Reactive!
+
+// const playlists = toRef(props,'playlists')
+// playlists.value
+
+const { playlists } = toRefs(props);
+playlists.value;
 
 // const playlists = ref<Playlist[]>([]);
 
