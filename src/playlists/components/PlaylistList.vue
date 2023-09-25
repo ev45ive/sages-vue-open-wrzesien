@@ -1,21 +1,45 @@
 <template>
-    <div>
-        <h3>List</h3>
+  <div>
+    <!-- 
+        for(let index in items)
+        for(let item of items) 
+    -->
+
+    <div class="list-group">
+      <button
+        v-for="(playlist, index) of playlists"
+        type="button"
+        class="list-group-item list-group-item-action"
+      >
+        {{ index + 1 }}. {{ playlist.name }}
+      </button>
     </div>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { ref } from "vue";
 
-export default defineComponent({
-    setup () {
-        
-
-        return {}
-    }
-})
+const playlists = ref([
+  {
+    id: "123",
+    name: "Playlist 123",
+    public: true,
+    description: "Best playlist",
+  },
+  {
+    id: "234",
+    name: "Playlist 234",
+    public: false,
+    description: "Awesome playlist",
+  },
+  {
+    id: "345",
+    name: "Playlist 345",
+    public: true,
+    description: "Cool playlist",
+  },
+]);
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
