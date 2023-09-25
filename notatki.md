@@ -1,3 +1,5 @@
+
+# Instalacje
 node -v
 v18.16.0
 
@@ -18,3 +20,21 @@ chrome://version
 Vs code -> F1 -> Git clone -> Clone from URL -> Paste -> Enter -> select location -> open
 git clone https://bitbucket.org/ev45ive/sages-vue-open-wrzesien.git sages-vue-open-wrzesien
 cd sages-vue-open-wrzesien
+
+
+## Vite
+https://vitejs.dev/guide/
+
+npm create vite@latest
+
+√ Project name: ... vite-project
+√ Select a framework: » Vue
+√ Select a variant: » TypeScript
+
+Scaffolding project in C:\Projects\sages-vue-open-wrzesien\vite-project...
+
+Done. Now run:   
+
+  cd vite-project
+  npm install    
+  npm run dev
