@@ -26,6 +26,9 @@ https://marketplace.visualstudio.com/items?itemName=Vue.volar
 https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets
 https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin
 
+## Vue Devtools
+https://devtools.vuejs.org/
+
 ## Volar TS Takeover Mode
 https://vuejs.org/guide/typescript/overview.html#volar-takeover-mode
 
