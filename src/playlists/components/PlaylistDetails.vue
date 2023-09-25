@@ -7,9 +7,12 @@
       <dd>{{ playlist.name }}</dd>
 
       <dt>Public</dt>
-      <dd :style="{ color: playlist.public ? 'red' : 'green' }">
+      <dd>
         {{ playlist.public ? "Yes" : "No" }}
       </dd>
+      <!-- <dd :style="{ color: playlist.public ? 'red' : 'green' }">
+        {{ playlist.public ? "Yes" : "No" }}
+      </dd> -->
 
       <dt>Description</dt>
       <dd>{{ playlist.description }}</dd>
@@ -35,4 +38,11 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.isPublic {
+  color: red;
+}
+.isPrivate {
+  color: green;
+}
+</style>
