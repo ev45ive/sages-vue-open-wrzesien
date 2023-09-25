@@ -13,7 +13,9 @@
       <dd>{{ playlist.description }}</dd>
     </dl>
 
-    <button class="btn btn-primary" @click="0">Edit</button>
+    <button class="btn btn-primary" @click="$emit('edit', playlist.id)">
+      Edit
+    </button>
   </div>
 </template>
 
@@ -22,6 +24,10 @@ import { Playlist } from "../../common/model/Playlist";
 
 defineProps<{
   playlist: Playlist;
+}>();
+
+defineEmits<{
+  (e: "edit", id: Playlist["id"]): void;
 }>();
 </script>
 

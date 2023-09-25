@@ -8,8 +8,18 @@
         />
       </div>
       <div class="col">
-        <PlaylistDetails :playlist="selected" v-if="mode === 'details'" />
-        <PlaylistEditor :playlist="selected" v-else-if="mode === 'editor'" />
+        <PlaylistDetails
+          :playlist="selected"
+          @edit="showEditor"
+          v-if="mode === 'details'"
+        />
+
+        <PlaylistEditor
+          @cancel="showDetails"
+          @save="savePlaylist($event)"
+          :playlist="selected"
+          v-else-if="mode === 'editor'"
+        />
       </div>
     </div>
   </div>
@@ -37,6 +47,7 @@ const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
 const savePlaylist = (draft: Playlist) => {
   mode.value = "editor";
+  selected.value = draft;
 };
 </script>
 

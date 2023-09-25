@@ -2,7 +2,7 @@
   <div>
     <pre>{{ playlist }}</pre>
 
-    <form>
+    <form @submit="submit">
       <div class="mb-3">
         <label for="playlistName" class="form-label">Name</label>
 
@@ -36,7 +36,7 @@
         ></textarea>
       </div>
 
-      <button class="btn btn-danger" @click="0">Cancel</button>
+      <button class="btn btn-danger" @click="$emit('cancel')">Cancel</button>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
@@ -45,9 +45,18 @@
 <script lang="ts" setup>
 import { Playlist } from "../../common/model/Playlist";
 
-defineProps<{
+const { playlist } = defineProps<{
   playlist: Playlist;
 }>();
+
+const $emit = defineEmits<{
+  (e: "cancel"): void;
+  (e: "save", p: Playlist): void;
+}>();
+
+const submit = () => {
+  $emit("save", playlist);
+};
 </script>
 
 <style scoped></style>
