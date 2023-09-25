@@ -62,6 +62,8 @@ const draft = ref<Playlist>(
       }
 );
 
+// TODO: Watch - create draft from current playlist
+
 const $emit = defineEmits<{
   (e: "cancel"): void;
   (e: "save", p: Playlist): void;
