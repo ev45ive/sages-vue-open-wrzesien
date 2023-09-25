@@ -5,6 +5,8 @@
     <dl v-bind:id="'playlist_' + playlist.id" :title="playlist.name">
       <dt>Name</dt>
       <dd>{{ playlist.name }}</dd>
+      <dd v-text="playlist.name "></dd>
+      <dd v-html="playlist.name "></dd>
 
       <dt>Public</dt>
       <dd
@@ -26,22 +28,16 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-// export default defineComponent({
-//   setup() {
-    const playlist = ref({
-      id: "123",
-      name: "Playlist 123",
-      public: true,
-      description: "Best playlist",
-    });
+const playlist = ref({
+  id: "123",
+  name: "Playlist 123 <h1>Placki</h1>",
+  public: true,
+  description: "Best playlist",
+});
 
-    const togglePublic = () => {
-      playlist.value.public = !playlist.value.public;
-    };
-
-//     return { playlist, togglePublic };
-//   },
-// });
+const togglePublic = () => {
+  playlist.value.public = !playlist.value.public;
+};
 </script>
 
 <style scoped>
