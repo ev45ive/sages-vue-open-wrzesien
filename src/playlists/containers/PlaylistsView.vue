@@ -6,11 +6,11 @@
         <PlaylistList />
       </div>
       <div class="col">
-        <button class="btn btn-danger">Cancel</button>
-        <button class="btn btn-primary">Edit</button>
-        
-        <PlaylistDetails v-show="true" />
-        <PlaylistEditor :hidden="true"/>
+        <button class="btn btn-danger" @click="showDetails">Cancel</button>
+        <button class="btn btn-primary" v-on:click="showEditor()">Edit</button>
+
+        <PlaylistDetails v-show="mode === 'details'" />
+        <PlaylistEditor :hidden="mode !== 'editor'"/>
       </div>
     </div>
   </div>
@@ -27,12 +27,6 @@ const mode = ref<"details" | "editor">("details");
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
 
-// export default defineComponent({
-//   setup() {
-//     return {};
-//   },
-//   components: { PlaylistDetails, PlaylistEditor, PlaylistList },
-// });
 </script>
 
 <style scoped></style>
