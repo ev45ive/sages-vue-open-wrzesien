@@ -20,6 +20,7 @@
       <dt>Description</dt>
       <dd>{{ playlist.description }}</dd>
     </dl>
+    {{ placki }}
   </div>
 </template>
 
@@ -29,20 +30,34 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  data: () => ({
-    message: "123",
-    playlist: {
+  setup() {
+    const playlist = {
       id: "123",
       name: "Playlist 123",
       public: true,
       description: "Best playlist",
-    },
-  }),
-  methods: {
-    togglePublic() {
-      this.playlist.public = !this.playlist.public;
-    },
+    };
+    const togglePublic = () => {
+      playlist.public = !playlist.public;
+    };
+
+    // Template API:
+    return { playlist, togglePublic, placki: 123 };
   },
+  // data: () => ({
+  //   message: "123",
+  //   playlist: {
+  //     id: "123",
+  //     name: "Playlist 123",
+  //     public: true,
+  //     description: "Best playlist",
+  //   },
+  // }),
+  // methods: {
+  //   togglePublic() {
+  //     this.playlist.public = !this.playlist.public;
+  //   },
+  // },
 });
 </script>
 
