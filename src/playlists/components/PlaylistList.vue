@@ -17,8 +17,33 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from "vue";
+<script lang="ts">
+import { defineComponent, PropType, ref } from "vue";
+import { Playlist } from "../../common/model/Playlist";
+
+export default defineComponent({
+  // props:['playlists'],
+  props: {
+    playlists: {
+      default: [] as Playlist[],
+      type: Array as PropType<Playlist[]>,
+    },
+  },
+  setup(props) {
+    const playlists = props.playlists;
+    const selectedId = ref("234");
+
+    const select = (id: string) => {
+      selectedId.value = id;
+    };
+    return { playlists, select, selectedId };
+  },
+});
+</script>
+
+<!-- 
+<script2 lang="ts" setup>
+import { defineComponent, ref } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 const playlists = ref<Playlist[]>([]);
 const selectedId = ref("234");
@@ -26,17 +51,6 @@ const selectedId = ref("234");
 const select = (id: string) => {
   selectedId.value = id;
 };
-
-// function a(id: string | number) {
-//   if (typeof id === "string") {
-//     id.toLocaleLowerCase();
-//   } else if (typeof id === "number") {
-//     id.toExponential();
-//   } else {
-//     id // never
-//     throw new Error('Not supported ID type!')
-//   }
-// }
-</script>
+</script2> -->
 
 <style scoped></style>
