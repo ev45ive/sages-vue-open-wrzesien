@@ -8,6 +8,8 @@
         class="list-group-item list-group-item-action"
         :class="{ active: playlist.id === selectedId }"
         @click="select(playlist.id)"
+        @keyup.enter="select(playlist.id)"
+        @keyup.delete="$emit('remove', playlist.id)"
       >
         <span>{{ index + 1 }}. {{ playlist.name }}</span>
         <span class="close float-end" @click.stop="$emit('remove', playlist.id)"
