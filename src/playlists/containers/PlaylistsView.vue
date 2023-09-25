@@ -5,6 +5,7 @@
         <PlaylistList
           :playlists="playlists"
           :selected-id="selected?.id"
+          @remove="removePlaylist"
           @select="selectPlaylistById($event)"
         />
         <button class="btn btn-primary mt-5" @click="mode = 'creator'">
@@ -49,6 +50,7 @@ const playlists = ref<Playlist[]>(mockPlaylists);
 const selected = ref<Playlist | undefined>();
 
 const selectPlaylistById = (id: string) => {
+  debugger
   selected.value = playlists.value.find((p) => p.id === id);
 };
 
@@ -56,6 +58,7 @@ const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
 
 const removePlaylist = (id: Playlist["id"]) => {
+  debugger
   const index = playlists.value.findIndex((p) => p.id === id);
   playlists.value.splice(index, 1);
   selected.value = undefined;
@@ -63,6 +66,7 @@ const removePlaylist = (id: Playlist["id"]) => {
 };
 
 const savePlaylist = (draft: Playlist) => {
+  debugger
   const index = playlists.value.findIndex((p) => p.id === draft.id);
   playlists.value[index] = draft;
   selected.value = draft;

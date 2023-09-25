@@ -10,7 +10,9 @@
         @click="select(playlist.id)"
       >
         {{ index + 1 }}. {{ playlist.name }}
-        <span class="close float-end">&times;</span>
+        <span class="close float-end" @click="$emit('remove', playlist.id)"
+          >&times;</span
+        >
       </button>
     </div>
     <p class="text-center text-muted" v-if="!playlists.length">No playlists</p>
@@ -27,6 +29,7 @@ defineProps<{
 
 const $emit = defineEmits<{
   (e: "select", payload: string): void;
+  (e: "remove", payload: Playlist["id"]): void;
 }>();
 
 const select = (id: string) => {
