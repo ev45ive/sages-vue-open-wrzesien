@@ -22,7 +22,7 @@
           type="checkbox"
           class="form-check-input"
           id="playlistPublic"
-          :checked="playlist.public"
+          v-model="playlist.public"
         />
         <label class="form-check-label" for="playlistPublic">Public</label>
       </div>
@@ -32,7 +32,7 @@
           class="form-control"
           id="playlistDescription"
           rows="3"
-          :value="playlist.description"
+          v-model="playlist.description"
         ></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
