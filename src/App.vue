@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import PlaylistsView from "./playlists/containers/PlaylistsView.vue";
 </script>
 
 <template>
   <div>
-    <h1>Ala ma kota!</h1>
+    <!-- .container>.row>.col -->
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1 class="display-3">Hello Vue</h1>
+          <PlaylistsView />
+        </div>
+      </div>
+    </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped> 
-</style>
+<style scoped></style>

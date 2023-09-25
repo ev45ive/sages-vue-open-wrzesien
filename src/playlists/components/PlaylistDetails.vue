@@ -1,23 +1,19 @@
 <template>
-    <div>
-
-    </div>
+  <div>
+    <h3>Details</h3>
+  </div>
 </template>
 
 <script lang="ts">
 //vbase-3-ts
 
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-    setup () {
-        
-
-        return {}
-    }
-})
+  setup() {
+    return {};
+  },
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
