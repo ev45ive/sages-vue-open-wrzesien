@@ -43,10 +43,10 @@ import PlaylistList from "../components/PlaylistList.vue";
 import { mockPlaylists } from "../components/mockPlaylists";
 import { Playlist } from "../../common/model/Playlist";
 
-const mode = ref<"details" | "editor" | "creator">("creator");
+const mode = ref<"details" | "editor" | "creator">("details");
 
 const playlists = ref<Playlist[]>(mockPlaylists);
-const selected = ref<Playlist | undefined>(/* mockPlaylists[0] */);
+const selected = ref<Playlist | undefined>();
 
 const selectPlaylistById = (id: string) => {
   selected.value = playlists.value.find((p) => p.id === id);
@@ -54,6 +54,13 @@ const selectPlaylistById = (id: string) => {
 
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
+
+const removePlaylist = (id: Playlist["id"]) => {
+  const index = playlists.value.findIndex((p) => p.id === id);
+  playlists.value.splice(index, 1);
+  selected.value = undefined;
+  mode.value = "details";
+};
 
 const savePlaylist = (draft: Playlist) => {
   const index = playlists.value.findIndex((p) => p.id === draft.id);

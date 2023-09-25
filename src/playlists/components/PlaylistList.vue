@@ -10,6 +10,7 @@
         @click="select(playlist.id)"
       >
         {{ index + 1 }}. {{ playlist.name }}
+        <span class="close float-end">&times;</span>
       </button>
     </div>
     <p class="text-center text-muted" v-if="!playlists.length">No playlists</p>
