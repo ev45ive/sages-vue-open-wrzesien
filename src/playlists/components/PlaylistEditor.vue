@@ -41,14 +41,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { Playlist } from '../../common/model/Playlist';
 
-const playlist = ref({
-  id: "123",
-  name: "Playlist 123",
-  public: true,
-  description: "Best playlist",
-});
+
+defineProps<{
+  playlist: Playlist;
+}>();
+
 </script>
 
 <style scoped></style>

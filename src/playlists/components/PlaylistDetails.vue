@@ -1,19 +1,11 @@
 <template>
   <div>
-    <!-- <h3 id="test">Details {{ message.toString() + '!' }}</h3> -->
-
     <dl v-bind:id="'playlist_' + playlist.id" :title="playlist.name">
       <dt>Name</dt>
       <dd>{{ playlist.name }}</dd>
 
       <dt>Public</dt>
-      <dd
-        :class="[
-          { isPublic: playlist.public, isPrivate: !playlist.public },
-          'placki',
-        ]"
-        v-on:click="togglePublic()"
-      >
+      <dd :class="{ isPublic: playlist.public, isPrivate: !playlist.public }">
         {{ playlist.public ? "Yes" : "No" }}
       </dd>
 
@@ -24,18 +16,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { Playlist } from "../../common/model/Playlist";
 
-const playlist = ref({
-  id: "123",
-  name: "Playlist 123 <h1>Placki</h1>",
-  public: true,
-  description: "Best playlist",
-});
+defineProps<{
+  playlist: Playlist;
+}>();
 
-const togglePublic = () => {
-  playlist.value.public = !playlist.value.public;
-};
+
 </script>
 
 <style scoped>

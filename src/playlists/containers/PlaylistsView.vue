@@ -13,8 +13,8 @@
         <button class="btn btn-danger" @click="showDetails">Cancel</button>
         <button class="btn btn-primary" @click="showEditor">Edit</button>
 
-        <PlaylistDetails v-if="mode === 'details'" />
-        <PlaylistEditor v-else-if="mode === 'editor'" />
+        <PlaylistDetails :playlist="selected" v-if="mode === 'details'" />
+        <PlaylistEditor  :playlist="selected" v-else-if="mode === 'editor'" />
       </div>
     </div>
   </div>
