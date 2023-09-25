@@ -9,8 +9,8 @@
         :class="{ active: playlist.id === selectedId }"
         @click="select(playlist.id)"
       >
-        {{ index + 1 }}. {{ playlist.name }}
-        <span class="close float-end" @click="$emit('remove', playlist.id)"
+        <span>{{ index + 1 }}. {{ playlist.name }}</span>
+        <span class="close float-end" @click.stop="$emit('remove', playlist.id)"
           >&times;</span
         >
       </button>
