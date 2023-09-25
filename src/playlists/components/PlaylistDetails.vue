@@ -1,6 +1,15 @@
 <template>
   <div>
-    <h3>Details</h3>
+    <!-- <h3>Details {{ message.toString() + '!' }}</h3> -->
+
+    <dl>
+      <dt>Name</dt>
+      <dd>tutaj nazwa</dd>
+      <dt>Public</dt>
+      <dd>No</dd>
+      <dt>Description</dt>
+      <dd>opis tutaj</dd>
+    </dl>
   </div>
 </template>
 
@@ -10,9 +19,15 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  setup() {
-    return {};
-  },
+  data: () => ({
+    message: "123",
+    playlist: {
+      id: "123",
+      name: "Playlist 123",
+      public: true,
+      description: "Best playlist",
+    },
+  }),
 });
 </script>
 
