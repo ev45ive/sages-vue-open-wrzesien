@@ -1,8 +1,10 @@
 <template>
   <div>
-    <!-- <h3>Details {{ message.toString() + '!' }}</h3> -->
+    <!-- <h3 id="test">Details {{ message.toString() + '!' }}</h3> -->
 
-    <dl>
+    <dl v-bind:id="'playlist_' + playlist.id" 
+        :title="playlist.name">
+        
       <dt>Name</dt>
       <dd>{{ playlist.name }}</dd>
 
