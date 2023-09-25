@@ -2,14 +2,14 @@
   <div>
     <!-- <h3 id="test">Details {{ message.toString() + '!' }}</h3> -->
 
-    <dl v-bind:id="'playlist_' + playlist.id" 
-        :title="playlist.name">
-        
+    <dl v-bind:id="'playlist_' + playlist.id" :title="playlist.name">
       <dt>Name</dt>
       <dd>{{ playlist.name }}</dd>
 
       <dt>Public</dt>
-      <dd>{{ playlist.public ? "Yes" : "No" }}</dd>
+      <dd :style="{ color: playlist.public ? 'red' : 'green' }">
+        {{ playlist.public ? "Yes" : "No" }}
+      </dd>
 
       <dt>Description</dt>
       <dd>{{ playlist.description }}</dd>
