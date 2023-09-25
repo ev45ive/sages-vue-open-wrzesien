@@ -53,3 +53,18 @@ Done. Now run:
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
   ➜  press h to show help
+
+
+## Playlists module 
+
+mkdir -p src/playlists/containers/
+mkdir -p src/playlists/components/
+
+
+touch src/components/MyButton.vue
+
+touch src/playlists/containers/PlaylistsView.vue
+
+touch src/playlists/components/PlaylistList.vue
+touch src/playlists/components/PlaylistDetails.vue
+touch src/playlists/components/PlaylistEditor.vue
