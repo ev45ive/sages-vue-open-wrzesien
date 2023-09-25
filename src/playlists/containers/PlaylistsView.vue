@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import PlaylistDetails from "../components/PlaylistDetails.vue";
 import PlaylistEditor from "../components/PlaylistEditor.vue";
 import PlaylistList from "../components/PlaylistList.vue";
@@ -47,12 +47,16 @@ import { Playlist } from "../../common/model/Playlist";
 const mode = ref<"details" | "editor" | "creator">("details");
 
 const playlists = ref<Playlist[]>(mockPlaylists);
-const selectedId = ref<Playlist['id'] | undefined>();
+const selectedId = ref<Playlist["id"] | undefined>();
 const selected = ref<Playlist | undefined>();
 
-const selectPlaylistById = (id: string) => {
-  selectedId.value = id
+watch(selectedId, (id) => {
   selected.value = playlists.value.find((p) => p.id === id);
+});
+
+const selectPlaylistById = (id: string) => {
+  selectedId.value = id;
+  // selected.value = playlists.value.find((p) => p.id === id);
 };
 
 const showDetails = () => (mode.value = "details");
@@ -61,25 +65,34 @@ const showEditor = () => (mode.value = "editor");
 const removePlaylist = (id: Playlist["id"]) => {
   const index = playlists.value.findIndex((p) => p.id === id);
   playlists.value.splice(index, 1);
-  selected.value = undefined;
-  selectedId.value = undefined
+  selectedId.value = undefined;
+  // selected.value = undefined; // watcher!
   mode.value = "details";
 };
 
 const savePlaylist = (draft: Playlist) => {
   const index = playlists.value.findIndex((p) => p.id === draft.id);
   playlists.value[index] = draft;
-  selected.value = draft;
-  selectedId.value = draft.id
+  selectedId.value = draft.id;
+  // selected.value = draft; // watcher!
   mode.value = "details";
 };
+
 const createPlaylist = (draft: Playlist) => {
   draft.id = crypto.randomUUID();
   playlists.value.push(draft);
-  selected.value = draft;
-  selectedId.value = draft.id
+  selectedId.value = draft.id;
+  // selected.value = draft; // watcher!
   mode.value = "details";
 };
+
+// export const {
+//   watch:{
+//     selectedId(id){
+//       // ...
+//     }
+//   }
+// }
 </script>
 
 <style scoped></style>
