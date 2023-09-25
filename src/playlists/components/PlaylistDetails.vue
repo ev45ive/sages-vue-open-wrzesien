@@ -7,15 +7,15 @@
       <dd>{{ playlist.name }}</dd>
 
       <dt>Public</dt>
-      <dd :class="[{ isPublic: playlist.public, isPrivate: !playlist.public }, 'placki']">
+      <dd
+        :class="[
+          { isPublic: playlist.public, isPrivate: !playlist.public },
+          'placki',
+        ]"
+        v-on:click="togglePublic()"
+      >
         {{ playlist.public ? "Yes" : "No" }}
       </dd>
-      <!-- <dd :class="playlist.public ? 'isPublic' : 'isPrivate'">
-        {{ playlist.public ? "Yes" : "No" }}
-      </dd> -->
-      <!-- <dd :style="{ color: playlist.public ? 'red' : 'green' }">
-        {{ playlist.public ? "Yes" : "No" }}
-      </dd> -->
 
       <dt>Description</dt>
       <dd>{{ playlist.description }}</dd>
@@ -38,6 +38,11 @@ export default defineComponent({
       description: "Best playlist",
     },
   }),
+  methods: {
+    togglePublic() {
+      this.playlist.public = !this.playlist.public;
+    },
+  },
 });
 </script>
 
