@@ -41,19 +41,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  data() {
-    return {
-      playlist: {
-        id: "123",
-        name: "Playlist 123",
-        public: true,
-        description: "Best playlist",
-      },
-    };
+  setup(/* props, ctx */) {
+    const playlist = ref({
+      id: "123",
+      name: "Playlist 123",
+      public: true,
+      description: "Best playlist",
+    });
+
+    return { playlist };
   },
+  //   data() {
+  //     return {
+  //       playlist: {
+  //         id: "123",
+  //         name: "Playlist 123",
+  //         public: true,
+  //         description: "Best playlist",
+  //       },
+  //     };
+  //   },
 });
 </script>
 

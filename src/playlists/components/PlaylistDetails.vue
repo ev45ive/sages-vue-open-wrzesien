@@ -41,7 +41,6 @@ export default defineComponent({
       playlist.value.public = !playlist.value.public;
     };
 
-    // Template API:
     return { playlist, togglePublic };
   },
 });
