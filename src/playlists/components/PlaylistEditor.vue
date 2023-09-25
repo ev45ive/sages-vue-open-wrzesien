@@ -40,30 +40,14 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script lang="ts" setup>
+import { ref } from "vue";
 
-export default defineComponent({
-  setup(/* props, ctx */) {
-    const playlist = ref({
-      id: "123",
-      name: "Playlist 123",
-      public: true,
-      description: "Best playlist",
-    });
-
-    return { playlist };
-  },
-  //   data() {
-  //     return {
-  //       playlist: {
-  //         id: "123",
-  //         name: "Playlist 123",
-  //         public: true,
-  //         description: "Best playlist",
-  //       },
-  //     };
-  //   },
+const playlist = ref({
+  id: "123",
+  name: "Playlist 123",
+  public: true,
+  description: "Best playlist",
 });
 </script>
 

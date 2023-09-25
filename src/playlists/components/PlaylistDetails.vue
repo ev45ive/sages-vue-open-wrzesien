@@ -23,13 +23,11 @@
   </div>
 </template>
 
-<script lang="ts">
-//vbase-3-ts
+<script lang="ts" setup>
+import { ref } from "vue";
 
-import { defineComponent, ref } from "vue";
-
-export default defineComponent({
-  setup() {
+// export default defineComponent({
+//   setup() {
     const playlist = ref({
       id: "123",
       name: "Playlist 123",
@@ -41,9 +39,9 @@ export default defineComponent({
       playlist.value.public = !playlist.value.public;
     };
 
-    return { playlist, togglePublic };
-  },
-});
+//     return { playlist, togglePublic };
+//   },
+// });
 </script>
 
 <style scoped>
