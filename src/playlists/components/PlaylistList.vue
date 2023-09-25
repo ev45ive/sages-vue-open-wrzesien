@@ -17,19 +17,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 
-defineProps<{ playlists: Playlist[] }>();
+defineProps<{
+  playlists: Playlist[];
+  selectedId: Playlist["id"];
+}>();
 
 const $emit = defineEmits<{
   (e: "select", payload: string): void;
 }>();
 
-const selectedId = ref("234");
-
 const select = (id: string) => {
-  selectedId.value = id;
   $emit("select", id);
 };
 </script>

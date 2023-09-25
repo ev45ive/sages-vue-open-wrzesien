@@ -4,6 +4,7 @@
       <div class="col">
         <PlaylistList
           :playlists="playlists"
+          :selected-id="selected.id"
           @select="selectPlaylistById($event)"
         />
       </div>
@@ -42,7 +43,6 @@ const selectPlaylistById = (id: string) => {
   selected.value = playlists.value.find((p) => p.id === id)!;
 };
 
-// TODO: Connect buttons
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
 const savePlaylist = (draft: Playlist) => {
