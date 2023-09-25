@@ -4,11 +4,13 @@
 
     <dl>
       <dt>Name</dt>
-      <dd>tutaj nazwa</dd>
+      <dd>{{ playlist.name }}</dd>
+
       <dt>Public</dt>
-      <dd>No</dd>
+      <dd>{{ playlist.public ? "Yes" : "No" }}</dd>
+
       <dt>Description</dt>
-      <dd>opis tutaj</dd>
+      <dd>{{ playlist.description }}</dd>
     </dl>
   </div>
 </template>
