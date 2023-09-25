@@ -45,9 +45,12 @@ const selectPlaylistById = (id: string) => {
 
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
+
 const savePlaylist = (draft: Playlist) => {
-  mode.value = "editor";
+  const index = playlists.value.findIndex((p) => p.id === draft.id);
+  playlists.value[index] = draft;
   selected.value = draft;
+  mode.value = "details";
 };
 </script>
 

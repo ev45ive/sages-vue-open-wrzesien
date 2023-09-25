@@ -1,8 +1,9 @@
 <template>
   <div>
     <pre>{{ playlist }}</pre>
+    <pre>{{ draft }}</pre>
 
-    <form @submit="submit">
+    <form @submit.prevent="submit">
       <div class="mb-3">
         <label for="playlistName" class="form-label">Name</label>
 
@@ -10,11 +11,11 @@
           type="text"
           class="form-control"
           id="playlistName"
-          v-model="playlist.name"
+          v-model="draft.name"
         />
 
         <div class="form-text text-muted float-end">
-          {{ playlist.name.length }} / 100
+          {{ draft.name.length }} / 100
         </div>
       </div>
       <div class="mb-3 form-check">
@@ -22,7 +23,7 @@
           type="checkbox"
           class="form-check-input"
           id="playlistPublic"
-          v-model="playlist.public"
+          v-model="draft.public"
         />
         <label class="form-check-label" for="playlistPublic">Public</label>
       </div>
@@ -32,7 +33,7 @@
           class="form-control"
           id="playlistDescription"
           rows="3"
-          v-model="playlist.description"
+          v-model="draft.description"
         ></textarea>
       </div>
 
@@ -43,11 +44,14 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 
 const { playlist } = defineProps<{
   playlist: Playlist;
 }>();
+
+const draft = ref({ ...playlist });
 
 const $emit = defineEmits<{
   (e: "cancel"): void;
@@ -55,7 +59,10 @@ const $emit = defineEmits<{
 }>();
 
 const submit = () => {
-  $emit("save", playlist);
+  $emit("save", {
+    ...playlist,
+    ...draft.value,
+  });
 };
 </script>
 
