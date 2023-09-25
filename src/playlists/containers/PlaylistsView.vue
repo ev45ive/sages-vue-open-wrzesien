@@ -36,11 +36,27 @@ import { Playlist } from "../../common/model/Playlist";
 
 const mode = ref<"details" | "editor">("details");
 
-const playlists = ref<Playlist[]>(mockPlaylists);
+const playlists = ref<(Playlist )[]>(mockPlaylists);
 const selected = ref<Playlist>(mockPlaylists[0]);
 
 const selectPlaylistById = (id: string) => {
-  selected.value = playlists.value.find((p) => p.id === id)!;
+  // const selected = playlists.value.find((p) => p.id === id) as any
+  // const found = playlists.value.find((p) => p.id === id) as Playlist
+  // const found = playlists.value.find((p) => p.id === id) !
+  // const found = {} as Playlist;
+  const found: Playlist | undefined  = playlists.value.find(
+    (p) => p.id === id
+  );
+
+  // Type Narrowing: 
+  if(found !== undefined){
+    selected.value = found;
+  }else if(found == undefined){
+    found
+  }else{
+     found satisfies never
+     throw new Error('invalid playlist')
+  }
 };
 
 const showDetails = () => (mode.value = "details");
