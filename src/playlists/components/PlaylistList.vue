@@ -13,19 +13,30 @@
         {{ index + 1 }}. {{ playlist.name }}
       </button>
     </div>
+    <p class="text-center text-muted" v-if="!playlists.length">No playlists</p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { mockPlaylists } from "./mockPlaylists";
-
-const playlists = ref(mockPlaylists);
+import { Playlist } from "../../common/model/Playlist";
+const playlists = ref<Playlist[]>([]);
 const selectedId = ref("234");
 
 const select = (id: string) => {
   selectedId.value = id;
 };
+
+// function a(id: string | number) {
+//   if (typeof id === "string") {
+//     id.toLocaleLowerCase();
+//   } else if (typeof id === "number") {
+//     id.toExponential();
+//   } else {
+//     id // never
+//     throw new Error('Not supported ID type!')
+//   }
+// }
 </script>
 
 <style scoped></style>
