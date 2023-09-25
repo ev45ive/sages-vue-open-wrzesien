@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <dl v-bind:id="'playlist_' + playlist.id" :title="playlist.name">
+  <div v-if="playlist">
+    <dl :id="'playlist_' + playlist.id" :title="playlist.name">
       <dt>Name</dt>
       <dd>{{ playlist.name }}</dd>
 
@@ -17,13 +17,14 @@
       Edit
     </button>
   </div>
+  <p v-else class="alert alert-info">No playlist selected</p>
 </template>
 
 <script lang="ts" setup>
 import { Playlist } from "../../common/model/Playlist";
 
 defineProps<{
-  playlist: Playlist;
+  playlist?: Playlist;
 }>();
 
 defineEmits<{

@@ -21,7 +21,7 @@ import { Playlist } from "../../common/model/Playlist";
 
 defineProps<{
   playlists: Playlist[];
-  selectedId: Playlist["id"];
+  selectedId?: Playlist["id"];
 }>();
 
 const $emit = defineEmits<{

@@ -48,10 +48,19 @@ import { ref } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 
 const { playlist } = defineProps<{
-  playlist: Playlist;
+  playlist?: Playlist;
 }>();
 
-const draft = ref({ ...playlist });
+const draft = ref<Playlist>(
+  playlist
+    ? { ...playlist }
+    : {
+        id: "",
+        name: "",
+        description: "",
+        public: false,
+      }
+);
 
 const $emit = defineEmits<{
   (e: "cancel"): void;
