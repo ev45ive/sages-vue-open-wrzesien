@@ -7,10 +7,11 @@
       </div>
       <div class="col">
         <button class="btn btn-danger" @click="showDetails">Cancel</button>
-        <button class="btn btn-primary" v-on:click="showEditor()">Edit</button>
+        <button class="btn btn-primary" @click="showEditor">Edit</button>
 
-        <PlaylistDetails v-show="mode === 'details'" />
-        <PlaylistEditor :hidden="mode !== 'editor'"/>
+        <PlaylistDetails v-if="mode === 'details'" />
+        <PlaylistEditor v-else-if="mode === 'editor'" />
+        <p v-else>No playlist</p>
       </div>
     </div>
   </div>
@@ -22,11 +23,10 @@ import PlaylistDetails from "../components/PlaylistDetails.vue";
 import PlaylistEditor from "../components/PlaylistEditor.vue";
 import PlaylistList from "../components/PlaylistList.vue";
 
-const mode = ref<"details" | "editor">("details");
+const mode = ref<"details" | "editor" | ''>("");
 
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
-
 </script>
 
 <style scoped></style>
