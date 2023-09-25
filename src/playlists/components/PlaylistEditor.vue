@@ -58,9 +58,6 @@ const draft = ref<Playlist>({
   public: false,
 });
 
-// const reactivePlaylist = toRef(props, "playlist");
-// const playlist = props.playlist
-
 watch(
   () => props.playlist,
   (playlist) => (draft.value = { ...draft.value, ...playlist }),
