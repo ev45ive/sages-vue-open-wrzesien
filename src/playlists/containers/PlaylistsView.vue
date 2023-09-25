@@ -11,7 +11,6 @@
 
         <PlaylistDetails v-if="mode === 'details'" />
         <PlaylistEditor v-else-if="mode === 'editor'" />
-        <p v-else>No playlist</p>
       </div>
     </div>
   </div>
@@ -23,7 +22,7 @@ import PlaylistDetails from "../components/PlaylistDetails.vue";
 import PlaylistEditor from "../components/PlaylistEditor.vue";
 import PlaylistList from "../components/PlaylistList.vue";
 
-const mode = ref<"details" | "editor" | ''>("");
+const mode = ref<"details" | "editor">("details");
 
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
