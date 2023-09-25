@@ -55,6 +55,17 @@ Done. Now run:
   ➜  press h to show help
 
 
+## CSS Toolkits
+https://getbootstrap.com/
+https://tailwindcss.com/
+
+https://bootstrap-vue.org/docs/components/alert
+
+https://primevue.org/
+https://vuetifyjs.com/en/
+
+https://www.telerik.com/kendo-vue-ui
+
 ## Playlists module 
 
 mkdir -p src/playlists/containers/
