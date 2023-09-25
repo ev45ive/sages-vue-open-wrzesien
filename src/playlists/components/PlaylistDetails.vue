@@ -7,7 +7,7 @@
       <dd>{{ playlist.name }}</dd>
 
       <dt>Public</dt>
-      <dd :class="{ isPublic: playlist.public, isPrivate: !playlist.public }">
+      <dd :class="[{ isPublic: playlist.public, isPrivate: !playlist.public }, 'placki']">
         {{ playlist.public ? "Yes" : "No" }}
       </dd>
       <!-- <dd :class="playlist.public ? 'isPublic' : 'isPrivate'">
