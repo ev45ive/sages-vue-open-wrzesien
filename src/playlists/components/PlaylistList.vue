@@ -17,7 +17,31 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from "vue";
+import { Playlist } from "../../common/model/Playlist";
+
+// defineProps(['playlists'])
+// const props = defineProps({
+//   playlists: {
+//     default: [] as Playlist[],
+//     type: Array as PropType<Playlist[]>,
+//   },
+// });
+const props = defineProps<{ playlists: Playlist[] }>();
+
+props.playlists; // Not-Reactive!
+
+// const playlists = ref<Playlist[]>([]);
+
+const selectedId = ref("234");
+
+const select = (id: string) => {
+  selectedId.value = id;
+};
+</script>
+
+<!-- <script2 lang="ts">
 import { defineComponent, PropType, ref } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 
@@ -39,18 +63,6 @@ export default defineComponent({
     return { playlists, select, selectedId };
   },
 });
-</script>
-
-<!-- 
-<script2 lang="ts" setup>
-import { defineComponent, ref } from "vue";
-import { Playlist } from "../../common/model/Playlist";
-const playlists = ref<Playlist[]>([]);
-const selectedId = ref("234");
-
-const select = (id: string) => {
-  selectedId.value = id;
-};
 </script2> -->
 
 <style scoped></style>
