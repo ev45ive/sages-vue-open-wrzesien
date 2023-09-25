@@ -10,8 +10,7 @@
           type="text"
           class="form-control"
           id="playlistName"
-          :value="playlist.name"
-          @input="playlist.name = ($event.target as any).value"
+          v-model="playlist.name"
         />
 
         <div class="form-text text-muted float-end">
