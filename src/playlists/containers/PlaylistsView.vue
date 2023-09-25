@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import PlaylistDetails from "../components/PlaylistDetails.vue";
 import PlaylistEditor from "../components/PlaylistEditor.vue";
 import PlaylistList from "../components/PlaylistList.vue";
@@ -50,19 +50,15 @@ const playlists = ref<Playlist[]>(mockPlaylists);
 const selectedId = ref<Playlist["id"] | undefined>("123");
 const selected = ref<Playlist | undefined>();
 
-watch(selectedId, (id /* , oldValue */) => {
-  selected.value = playlists.value.find((p) => p.id === id);
-});
+watch(
+  selectedId,
+  (id) => (selected.value = playlists.value.find((p) => p.id === id)),
+  {
+    immediate: true, // run on mount
+  }
+);
 
-const selectPlaylistById = (id: string) => {
-  selectedId.value = id;
-  // selected.value = playlists.value.find((p) => p.id === id);
-};
-
-onMounted(() => {
-  selected.value = playlists.value.find((p) => p.id === selectedId.value);
-});
-onunm
+const selectPlaylistById = (id: string) => (selectedId.value = id);
 
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
