@@ -2,7 +2,16 @@
   <div>
     <div class="row">
       <div class="col">
-        <PlaylistList :playlists="playlists" />
+        <PlaylistList
+          :playlists="playlists"
+          @select="selectPlaylistById($event)"
+        />
+
+        <!-- <input
+          type="text"
+          :value="selected.name"
+          @keydown="($event.target as HTMLInputElement).value"
+        /> -->
       </div>
       <div class="col">
         <button class="btn btn-danger" @click="showDetails">Cancel</button>
@@ -26,6 +35,11 @@ import { Playlist } from "../../common/model/Playlist";
 const mode = ref<"details" | "editor">("details");
 
 const playlists = ref<Playlist[]>(mockPlaylists);
+const selected = ref<Playlist>(mockPlaylists[0]);
+
+const selectPlaylistById = (id: string) => {
+  selected.value = playlists.value.find((p) => p.id === id)!;
+};
 
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");

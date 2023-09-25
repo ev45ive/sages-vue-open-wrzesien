@@ -22,10 +22,15 @@ import { Playlist } from "../../common/model/Playlist";
 
 defineProps<{ playlists: Playlist[] }>();
 
+const $emit = defineEmits<{
+  (e: "select", payload: string): void;
+}>();
+
 const selectedId = ref("234");
 
 const select = (id: string) => {
   selectedId.value = id;
+  $emit("select", id);
 };
 </script>
 
