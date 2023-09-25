@@ -47,10 +47,11 @@ import { Playlist } from "../../common/model/Playlist";
 const mode = ref<"details" | "editor" | "creator">("details");
 
 const playlists = ref<Playlist[]>(mockPlaylists);
+const selectedId = ref<Playlist['id'] | undefined>();
 const selected = ref<Playlist | undefined>();
 
 const selectPlaylistById = (id: string) => {
-  debugger
+  selectedId.value = id
   selected.value = playlists.value.find((p) => p.id === id);
 };
 
@@ -58,24 +59,25 @@ const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
 
 const removePlaylist = (id: Playlist["id"]) => {
-  debugger
   const index = playlists.value.findIndex((p) => p.id === id);
   playlists.value.splice(index, 1);
   selected.value = undefined;
+  selectedId.value = undefined
   mode.value = "details";
 };
 
 const savePlaylist = (draft: Playlist) => {
-  debugger
   const index = playlists.value.findIndex((p) => p.id === draft.id);
   playlists.value[index] = draft;
   selected.value = draft;
+  selectedId.value = draft.id
   mode.value = "details";
 };
 const createPlaylist = (draft: Playlist) => {
   draft.id = crypto.randomUUID();
   playlists.value.push(draft);
   selected.value = draft;
+  selectedId.value = draft.id
   mode.value = "details";
 };
 </script>
