@@ -21,6 +21,15 @@ Vs code -> F1 -> Git clone -> Clone from URL -> Paste -> Enter -> select locatio
 git clone https://bitbucket.org/ev45ive/sages-vue-open-wrzesien.git sages-vue-open-wrzesien
 cd sages-vue-open-wrzesien
 
+## VS Code extensions
+https://marketplace.visualstudio.com/items?itemName=Vue.volar
+https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets
+https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin
+
+
+## Create vue
+https://vuejs.org/guide/quick-start.html
+
 
 ## Vite
 https://vitejs.dev/guide/
@@ -38,3 +47,9 @@ Done. Now run:
   cd vite-project
   npm install    
   npm run dev
+
+ VITE v4.4.9  ready in 958 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h to show help
