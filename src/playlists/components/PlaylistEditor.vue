@@ -44,25 +44,29 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, toRef, watch } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 
-const { playlist } = defineProps<{
+const props = defineProps<{
   playlist?: Playlist;
 }>();
 
-const draft = ref<Playlist>(
-  playlist
-    ? { ...playlist }
-    : {
-        id: "",
-        name: "",
-        description: "",
-        public: false,
-      }
-);
+const draft = ref<Playlist>({
+  id: "",
+  name: "",
+  description: "",
+  public: false,
+});
 
-// TODO: Watch - create draft from current playlist
+const reactivePlaylist = toRef(props, "playlist");
+
+watch(
+  reactivePlaylist,
+  (playlist) => (draft.value = { ...draft.value, ...playlist }),
+  {
+    immediate: true,
+  }
+);
 
 const $emit = defineEmits<{
   (e: "cancel"): void;
