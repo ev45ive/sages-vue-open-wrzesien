@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, toRef, watch } from "vue";
+import { ref, watch } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 
 const props = defineProps<{
@@ -58,13 +58,16 @@ const draft = ref<Playlist>({
   public: false,
 });
 
-const reactivePlaylist = toRef(props, "playlist");
+// const reactivePlaylist = toRef(props, "playlist");
+// const playlist = props.playlist
 
 watch(
-  reactivePlaylist,
+  () => props.playlist,
   (playlist) => (draft.value = { ...draft.value, ...playlist }),
   {
     immediate: true,
+    onTrack: console.log,
+    onTrigger: console.log,
   }
 );
 
@@ -75,7 +78,7 @@ const $emit = defineEmits<{
 
 const submit = () => {
   $emit("save", {
-    ...playlist,
+    ...props.playlist,
     ...draft.value,
   });
 };

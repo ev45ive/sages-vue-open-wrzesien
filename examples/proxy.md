@@ -23,10 +23,11 @@ proxyV2 = {
     }
 }
 proxyV2.value = 123
-// set secret
+// trigger (rerender) "value"
 123
+
 proxyV2.value
-// get secret
+// start tracking "value"
 123
 
 ```
