@@ -5,19 +5,35 @@
     <form>
       <div class="mb-3">
         <label for="playlistName" class="form-label">Name</label>
-        <input type="text" class="form-control" id="playlistName" :value="playlist.name" />
-        <div class="form-text text-muted float-end">{{ playlist.name.length }} / 100</div>
+
+        <input
+          type="text"
+          class="form-control"
+          id="playlistName"
+          :value="playlist.name"
+          @input="playlist.name = ($event.target as any).value"
+        />
+
+        <div class="form-text text-muted float-end">
+          {{ playlist.name.length }} / 100
+        </div>
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="playlistPublic" :checked="playlist.public" />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="playlistPublic"
+          :checked="playlist.public"
+        />
         <label class="form-check-label" for="playlistPublic">Public</label>
       </div>
       <div class="mb-3">
         <label for="playlistDescription" class="form-label">Description</label>
-        <textarea 
+        <textarea
           class="form-control"
           id="playlistDescription"
-          rows="3" :value="playlist.description"
+          rows="3"
+          :value="playlist.description"
         ></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
