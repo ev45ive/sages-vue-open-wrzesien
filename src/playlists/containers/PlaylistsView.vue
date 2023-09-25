@@ -15,15 +15,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import PlaylistList from "../components/PlaylistList.vue";
 import PlaylistDetails from "../components/PlaylistDetails.vue";
 import PlaylistEditor from "../components/PlaylistEditor.vue";
+import PlaylistList from "../components/PlaylistList.vue";
 
 export default defineComponent({
   setup() {
     return {};
   },
-  components: { PlaylistList, PlaylistDetails, PlaylistEditor },
+  components: { PlaylistDetails, PlaylistEditor, PlaylistList },
 });
 </script>
 

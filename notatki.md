@@ -26,6 +26,11 @@ https://marketplace.visualstudio.com/items?itemName=Vue.volar
 https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets
 https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin
 
+## Volar TS Takeover Mode
+https://vuejs.org/guide/typescript/overview.html#volar-takeover-mode
+
+Ctrl + Shift + P -> Type built and select "Extensions: Show Built-in Extensions" -> "TypeScript and JavaScript Language Features", and select "Disable (Workspace)".
+
 
 ## Create vue
 https://vuejs.org/guide/quick-start.html
