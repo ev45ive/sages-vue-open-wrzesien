@@ -6,25 +6,33 @@
         <PlaylistList />
       </div>
       <div class="col">
-        <PlaylistDetails />
-        <PlaylistEditor />
+        <button class="btn btn-danger">Cancel</button>
+        <button class="btn btn-primary">Edit</button>
+        
+        <PlaylistDetails v-show="true" />
+        <PlaylistEditor :hidden="true"/>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { ref } from "vue";
 import PlaylistDetails from "../components/PlaylistDetails.vue";
 import PlaylistEditor from "../components/PlaylistEditor.vue";
 import PlaylistList from "../components/PlaylistList.vue";
 
-export default defineComponent({
-  setup() {
-    return {};
-  },
-  components: { PlaylistDetails, PlaylistEditor, PlaylistList },
-});
+const mode = ref<"details" | "editor">("details");
+
+const showDetails = () => (mode.value = "details");
+const showEditor = () => (mode.value = "editor");
+
+// export default defineComponent({
+//   setup() {
+//     return {};
+//   },
+//   components: { PlaylistDetails, PlaylistEditor, PlaylistList },
+// });
 </script>
 
 <style scoped></style>

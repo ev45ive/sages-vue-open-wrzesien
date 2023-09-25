@@ -5,8 +5,6 @@
     <dl v-bind:id="'playlist_' + playlist.id" :title="playlist.name">
       <dt>Name</dt>
       <dd>{{ playlist.name }}</dd>
-      <dd v-text="playlist.name "></dd>
-      <dd v-html="playlist.name "></dd>
 
       <dt>Public</dt>
       <dd
