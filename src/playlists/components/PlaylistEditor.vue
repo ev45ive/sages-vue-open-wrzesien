@@ -1,21 +1,23 @@
 <template>
   <div>
+    <pre>{{ playlist }}</pre>
+    
     <form>
       <div class="mb-3">
         <label for="playlistName" class="form-label">Name</label>
-        <input type="text" class="form-control" id="playlistName" />
+        <input type="text" class="form-control" id="playlistName" :value="playlist.name" />
         <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="playlistPublic" />
+        <input type="checkbox" class="form-check-input" id="playlistPublic" :checked="playlist.public" />
         <label class="form-check-label" for="playlistPublic">Public</label>
       </div>
       <div class="mb-3">
         <label for="playlistDescription" class="form-label">Description</label>
-        <textarea
+        <textarea 
           class="form-control"
           id="playlistDescription"
-          rows="3"
+          rows="3" :value="playlist.description"
         ></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
