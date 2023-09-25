@@ -20,59 +20,30 @@
       <dt>Description</dt>
       <dd>{{ playlist.description }}</dd>
     </dl>
-
-    {{ playlist.tracks[0].name }}
   </div>
 </template>
 
 <script lang="ts">
 //vbase-3-ts
 
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    // Objects
-    const playlistReactinve = reactive({
+    const playlist = ref({
       id: "123",
       name: "Playlist 123",
       public: true,
       description: "Best playlist",
-      tracks: [{ name: "Track 12" }],
-    });
-
-    // Values
-    const playlistRef = ref({
-      id: "123",
-      name: "Playlist 123",
-      public: true,
-      description: "Best playlist",
-      tracks: [{ name: "Track 12" }],
     });
 
     const togglePublic = () => {
-      playlistReactinve.public = !playlistReactinve.public;
-      playlistRef.value.public = !playlistRef.value.public;
-      playlistRef.value.tracks[0].name = '234'
+      playlist.value.public = !playlist.value.public;
     };
 
     // Template API:
-    return { playlist: playlistRef, togglePublic, staticNonReactive: 123 };
+    return { playlist, togglePublic };
   },
-  // data: () => ({
-  //   message: "123",
-  //   playlist: {
-  //     id: "123",
-  //     name: "Playlist 123",
-  //     public: true,
-  //     description: "Best playlist",
-  //   },
-  // }),
-  // methods: {
-  //   togglePublic() {
-  //     this.playlist.public = !this.playlist.public;
-  //   },
-  // },
 });
 </script>
 
