@@ -7,9 +7,12 @@
       <dd>{{ playlist.name }}</dd>
 
       <dt>Public</dt>
-      <dd :class="playlist.public ? 'isPublic' : 'isPrivate'">
+      <dd :class="{ isPublic: playlist.public, isPrivate: !playlist.public }">
         {{ playlist.public ? "Yes" : "No" }}
       </dd>
+      <!-- <dd :class="playlist.public ? 'isPublic' : 'isPrivate'">
+        {{ playlist.public ? "Yes" : "No" }}
+      </dd> -->
       <!-- <dd :style="{ color: playlist.public ? 'red' : 'green' }">
         {{ playlist.public ? "Yes" : "No" }}
       </dd> -->
