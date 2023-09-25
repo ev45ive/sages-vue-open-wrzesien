@@ -11,6 +11,10 @@
         type="button"
         class="list-group-item list-group-item-action"
       >
+        <div v-for="(value, key, index) of playlist">
+          {{ index }} {{ key }}:{{ value }}
+        </div>
+
         {{ index + 1 }}. {{ playlist.name }}
       </button>
     </div>
