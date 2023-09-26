@@ -112,6 +112,5 @@ https://github.com/colinhacks/zod#objects
 
 ## Fetching data - useFetch/useQuery/etc.
 https://vueuse.org/core/useFetch/#usefetch
-https://use-http.com/#/?id=usage
 https://vue-query.vercel.app/#/guides/queries
 

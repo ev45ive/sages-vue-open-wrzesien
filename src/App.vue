@@ -2,8 +2,12 @@
 import { onMounted, ref } from "vue";
 import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
 import { checkLogin, login } from "./common/services/Auth";
+import { useQueryProvider } from "vue-query";
+
 const title = "MusicApp";
 const isOpen = ref(false);
+
+useQueryProvider(); // Global useQuery cache!
 
 onMounted(() => checkLogin());
 </script>

@@ -18,16 +18,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { useAlbumSearch } from "../../common/composables/useAlbumSearch";
 import ResultsGrid from "../components/ResultsGrid.vue";
 import SearchForm from "../components/SearchForm.vue";
 
 const query = ref("");
 
-const { data: results, error, isLoading } = useAlbumSearch(query);
-
-const albums = computed(() => results.value?.albums.items || []);
+const { data: albums, error, isLoading } = useAlbumSearch(query);
 
 const search = (q: string) => (query.value = q);
 </script>
