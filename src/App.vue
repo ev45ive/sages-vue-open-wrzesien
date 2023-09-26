@@ -4,7 +4,7 @@ import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
 import { checkLogin, login } from "./common/services/Auth";
 import { useQueryProvider } from "vue-query";
 import { isAxiosError } from "axios";
-
+import FetchingIndicator from './components/FetchingIndicator.vue'
 const title = "MusicApp";
 const isOpen = ref(false);
 
@@ -28,6 +28,7 @@ onMounted(() => checkLogin());
 <template>
   <div>
     <div class="container" v-once>
+      <FetchingIndicator />
       <div class="row">
         <div class="col">
           <button class="btn btn-dark float-end" @click="login">Login</button>

@@ -7,7 +7,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <p class="alert alert-info" v-if="isLoading">Loading</p>
+        <!--  -->
         <p class="alert alert-danger" v-if="error?.message">
           {{ error.message }}
         </p>
@@ -25,13 +25,7 @@ import SearchForm from "../components/SearchForm.vue";
 
 const query = ref("");
 
-const {
-  data: albums,
-  error,
-  isLoading,
-  // refetch,
-  // remove,
-} = useAlbumSearch(query);
+const { data: albums, error } = useAlbumSearch(query);
 
 const search = (q: string) => (query.value = q);
 </script>

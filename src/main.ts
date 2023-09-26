@@ -2,7 +2,9 @@ import { createApp } from "vue";
 import "bootstrap/dist/css/bootstrap.css";
 import App from "./App.vue";
 
-createApp(App).mount("#app");
+ createApp(App).mount("#app")
+
+
 
 /* (window as any).app = createApp({
   // Component provided template option but runtime compilation is not supported in this build of Vue.
