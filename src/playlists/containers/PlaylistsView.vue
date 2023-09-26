@@ -13,24 +13,23 @@
         </button>
       </div>
       <div class="col">
-        <PlaylistDetails
-          :playlist="selected"
-          @edit="showEditor"
-          v-if="mode === 'details'"
-        />
+        <KeepAlive>
+          <PlaylistDetails
+            :playlist="selected"
+            @edit="showEditor"
+            v-if="mode === 'details'" />
 
-        <PlaylistEditor
-          @cancel="showDetails"
-          @save="savePlaylist($event)"
-          :playlist="selected"
-          v-else-if="mode === 'editor'"
-        />
+          <PlaylistEditor
+            @cancel="showDetails"
+            @save="savePlaylist($event)"
+            :playlist="selected"
+            v-else-if="mode === 'editor'" />
 
-        <PlaylistEditor
-          @cancel="showDetails"
-          @save="createPlaylist($event)"
-          v-else-if="mode === 'creator'"
-        />
+          <PlaylistEditor
+            @cancel="showDetails"
+            @save="createPlaylist($event)"
+            v-else-if="mode === 'creator'"
+        /></KeepAlive>
       </div>
     </div>
   </div>
@@ -52,16 +51,6 @@ const selectedId = ref<Playlist["id"] | undefined>("123");
 const selected = computed(() =>
   playlists.value.find((p) => p.id === selectedId.value)
 );
-
-// const selected = ref<Playlist | undefined>();
-// watch(
-//   [selectedId, playlists],
-//   ([id, playlists]) => (selected.value = playlists.find((p) => p.id === id)),
-//   {
-//     immediate: true,
-//     deep: true,
-//   }
-// );
 
 const selectPlaylistById = (id: string) => (selectedId.value = id);
 
