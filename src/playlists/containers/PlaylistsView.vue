@@ -56,11 +56,12 @@ watch(
   ([id, playlists], _, onCleanup) => {
     // selectedId.value = Math.random().toString()  /// : Maximum recursive updates exceeded.
 
-    const handle = setTimeout(() => {
-      selected.value = playlists.find((p) => p.id === id);
-    }, 2000);
 
-    onCleanup(() => clearTimeout(handle)); // cancel previous watch effect
+      const handle = setTimeout(() => {
+        selected.value = playlists.find((p) => p.id === id);
+      }, 2000);
+
+      onCleanup(() => clearTimeout(handle)); // cancel previous watch effect
   },
   {
     immediate: true, // run on mount,
