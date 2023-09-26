@@ -15,7 +15,7 @@ d
           ref="playlistNameRef"
           v-model="draft.name"
         />
-        {{ focused && 'focused!' }}
+        {{ focused && "focused!" }}
         <div class="form-text text-muted float-end">
           {{ draft.name.length }} / 100
         </div>
@@ -46,52 +46,32 @@ d
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, defineProps, defineEmits } from "vue";
+import { ref, defineProps, defineEmits } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 import { useFocus } from "../../common/composables/useFocus";
-
-const playlistNameRef = ref<HTMLInputElement>();
-const { focused } = useFocus(playlistNameRef, { initialValue: true });
+import { useDraftFrom } from "../../common/composables/useDraftFrom";
 
 const props = defineProps<{
   playlist?: Playlist;
 }>();
-
-const draft = ref<Playlist>({
-  id: "",
-  name: "",
-  description: "",
-  public: false,
-});
-
-watch(
-  () => props.playlist,
-  (playlist) => (draft.value = { ...draft.value, ...playlist }),
-  {
-    immediate: true,
-  }
-);
 
 const $emit = defineEmits<{
   (e: "cancel"): void;
   (e: "save", p: Playlist): void;
 }>();
 
-const submit = () => {
-  $emit("save", {
-    ...props.playlist,
-    ...draft.value,
-  });
-};
+const playlistNameRef = ref<HTMLInputElement>();
 
-// onBeforeMount(() => console.log("onBeforeMount"));
-// onMounted(() => console.log("onMounted"));
-// onBeforeUpdate(() => console.log("onBeforeUpdate"));
-// onUpdated(() => console.log("onUpdated"));
-// onBeforeUnmount(() => console.log("onBeforeUnmount"));
-// onUnmounted(() => console.log("onUnmounted"));
-// onActivated(() => console.log("onActivated"));
-// onDeactivated(() => console.log("onDeactivated"));
+const { focused } = useFocus(playlistNameRef, { initialValue: true });
+
+const draft = useDraftFrom(() => props.playlist, {
+  id: "",
+  name: "",
+  description: "",
+  public: false,
+});
+
+const submit = () => $emit("save", draft.value);
 </script>
 
 <style scoped></style>
