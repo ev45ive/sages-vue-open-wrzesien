@@ -15,7 +15,7 @@ d
           ref="playlistNameRef"
           v-model="draft.name"
         />
-
+        {{ focused && 'focused!' }}
         <div class="form-text text-muted float-end">
           {{ draft.name.length }} / 100
         </div>
@@ -46,8 +46,12 @@ d
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, watch } from "vue";
+import { ref, watch, defineProps, defineEmits } from "vue";
 import { Playlist } from "../../common/model/Playlist";
+import { useFocus } from "../../common/composables/useFocus";
+
+const playlistNameRef = ref<HTMLInputElement>();
+const { focused } = useFocus(playlistNameRef, { initialValue: true });
 
 const props = defineProps<{
   playlist?: Playlist;
@@ -67,10 +71,6 @@ watch(
     immediate: true,
   }
 );
-
-const playlistNameRef = ref<HTMLInputElement>();
-
-onMounted(() => playlistNameRef.value?.focus());
 
 const $emit = defineEmits<{
   (e: "cancel"): void;
