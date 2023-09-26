@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { computed, ref } from "vue";
 import PlaylistDetails from "../components/PlaylistDetails.vue";
 import PlaylistEditor from "../components/PlaylistEditor.vue";
 import PlaylistList from "../components/PlaylistList.vue";
@@ -48,27 +48,24 @@ const mode = ref<"details" | "editor" | "creator">("details");
 
 const playlists = ref<Playlist[]>(mockPlaylists);
 const selectedId = ref<Playlist["id"] | undefined>("123");
-const selected = ref<Playlist | undefined>();
 
 // y = 2x + b
-watch(
-  [selectedId, playlists],
-  ([id, playlists], _, onCleanup) => {
-    // selectedId.value = Math.random().toString()  /// : Maximum recursive updates exceeded.
+const selected = computed(
+  () => playlists.value.find((p) => p.id === selectedId.value),
+  // {
+  //   onTrack: console.log,
+  // }
+)
 
-
-      const handle = setTimeout(() => {
-        selected.value = playlists.find((p) => p.id === id);
-      }, 2000);
-
-      onCleanup(() => clearTimeout(handle)); // cancel previous watch effect
-  },
-  {
-    immediate: true, // run on mount,
-    deep: true,
-    onTrack: console.log,
-  }
-);
+// const selected = ref<Playlist | undefined>();
+// watch(
+//   [selectedId, playlists],
+//   ([id, playlists]) => (selected.value = playlists.find((p) => p.id === id)),
+//   {
+//     immediate: true,
+//     deep: true,
+//   }
+// );
 
 const selectPlaylistById = (id: string) => (selectedId.value = id);
 
@@ -85,7 +82,6 @@ const removePlaylist = (id: Playlist["id"]) => {
 const savePlaylist = (draft: Playlist) => {
   const index = playlists.value.findIndex((p) => p.id === draft.id);
   playlists.value[index] = draft;
-  // selectedId.value = draft.id;
   mode.value = "details";
 };
 
@@ -95,14 +91,6 @@ const createPlaylist = (draft: Playlist) => {
   selectedId.value = draft.id;
   mode.value = "details";
 };
-
-// export const {
-//   watch:{
-//     selectedId(id){
-//       // ...
-//     }
-//   }
-// }
 </script>
 
 <style scoped></style>
