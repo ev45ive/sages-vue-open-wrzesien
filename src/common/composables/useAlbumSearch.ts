@@ -1,6 +1,7 @@
 import { Ref, ref, watch } from "vue";
 import axios from "axios";
-import { Album } from "../model/Album";
+import { Album, AlbumSearchResponse } from "../model/Album";
+import { getToken } from "../services/Auth";
 
 export function useAlbumSearch(query: Ref<string>) {
   const results = ref<Album[]>([]);
@@ -12,16 +13,20 @@ export function useAlbumSearch(query: Ref<string>) {
     const ctrl = new AbortController();
     isLoading.value = true;
     try {
-      const { data } = await axios.get("https://api.spotify.com/v1/search", {
+      const { data } = await axios.get<AlbumSearchResponse>("https://api.spotify.com/v1/search", {
         params: { type: "album", q: query },
-        headers: {},
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
         signal: ctrl.signal,
       });
-      results.value = data;
+      results.value = data.albums.items
+      
     } catch (e: unknown) {
       if (!axios.isAxiosError(e)) return (error.value = Error("Unknown Error"));
-      
-      if (!isSpotifyErrorResponse(e.response?.data)) return (error.value = Error("Unknown Error"));
+
+      if (!isSpotifyErrorResponse(e.response?.data))
+        return (error.value = Error("Unknown Error"));
 
       error.value = Error(e.response?.data.error.message);
       // if (e instanceof Error) error.value = e;

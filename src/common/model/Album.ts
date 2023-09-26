@@ -2,6 +2,9 @@
 // https://developer.spotify.com/documentation/web-api/reference/get-an-album
 // https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype
 
+export interface AlbumSearchResponse {
+    albums: PagingObject<AlbumResponse>
+}
 export interface AlbumResponse {
     album_type:             string;
     total_tracks:           number;
