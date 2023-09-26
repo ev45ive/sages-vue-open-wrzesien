@@ -1,4 +1,5 @@
-d<template>
+d
+<template>
   <div>
     <pre>{{ playlist }}</pre>
     <pre>{{ draft }}</pre>
@@ -44,7 +45,7 @@ d<template>
 </template>
 
 <script lang="ts" setup>
-import {  ref, watch } from "vue";
+import { ref, watch } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 
 const props = defineProps<{
@@ -63,8 +64,6 @@ watch(
   (playlist) => (draft.value = { ...draft.value, ...playlist }),
   {
     immediate: true,
-    // onTrack: console.log,
-    // onTrigger: console.log,
   }
 );
 

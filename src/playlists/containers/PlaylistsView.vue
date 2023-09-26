@@ -49,13 +49,9 @@ const mode = ref<"details" | "editor" | "creator">("details");
 const playlists = ref<Playlist[]>(mockPlaylists);
 const selectedId = ref<Playlist["id"] | undefined>("123");
 
-// y = 2x + b
-const selected = computed(
-  () => playlists.value.find((p) => p.id === selectedId.value),
-  // {
-  //   onTrack: console.log,
-  // }
-)
+const selected = computed(() =>
+  playlists.value.find((p) => p.id === selectedId.value)
+);
 
 // const selected = ref<Playlist | undefined>();
 // watch(
