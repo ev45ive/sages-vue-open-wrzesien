@@ -28,7 +28,11 @@ export const checkLogin = () => {
     sessionStorage.setItem("token", JSON.stringify(access_token));
     location.href = "";
   } else {
-    access_token = JSON.parse(sessionStorage.getItem("token") || "");
+    try {
+      access_token = JSON.parse(sessionStorage.getItem("token") || "");
+    } catch (e) {
+      sessionStorage.removeItem("token");
+    }
   }
   token = access_token;
 };
