@@ -14,14 +14,15 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-
-// https://vueuse.org/shared/watchDebounced/
+import { watchDebounced } from "@vueuse/core";
 
 const $emit = defineEmits<{
   (e: "search", query: string): void;
 }>();
 
 const query = ref("");
+
+watchDebounced(query, (q) => $emit("search", q), { debounce: 500 });
 
 const send = () => {
   $emit("search", query.value);
