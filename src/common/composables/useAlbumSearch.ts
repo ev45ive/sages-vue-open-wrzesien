@@ -19,9 +19,10 @@ export function useAlbumSearch(query: Ref<string>) {
       });
       results.value = data;
     } catch (e: unknown) {
-      if (!axios.isAxiosError(e) || !isSpotifyErrorResponse(e.response?.data)) {
-        return (error.value = Error("Unknown Error"));
-      }
+      if (!axios.isAxiosError(e)) return (error.value = Error("Unknown Error"));
+      
+      if (!isSpotifyErrorResponse(e.response?.data)) return (error.value = Error("Unknown Error"));
+
       error.value = Error(e.response?.data.error.message);
       // if (e instanceof Error) error.value = e;
     } finally {
