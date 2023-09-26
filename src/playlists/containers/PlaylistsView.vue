@@ -50,11 +50,14 @@ const playlists = ref<Playlist[]>(mockPlaylists);
 const selectedId = ref<Playlist["id"] | undefined>("123");
 const selected = ref<Playlist | undefined>();
 
+// y = 2x + b
 watch(
-  selectedId,
-  (id) => (selected.value = playlists.value.find((p) => p.id === id)),
+  [selectedId, playlists],
+  ([id, playlists]) => (selected.value = playlists.find((p) => p.id === id)),
   {
-    immediate: true, // run on mount
+    immediate: true, // run on mount,
+    deep: true,
+    onTrack: console.log,
   }
 );
 
@@ -67,15 +70,13 @@ const removePlaylist = (id: Playlist["id"]) => {
   const index = playlists.value.findIndex((p) => p.id === id);
   playlists.value.splice(index, 1);
   selectedId.value = undefined;
-  // selected.value = undefined; // watcher!
   mode.value = "details";
 };
 
 const savePlaylist = (draft: Playlist) => {
   const index = playlists.value.findIndex((p) => p.id === draft.id);
   playlists.value[index] = draft;
-  selectedId.value = draft.id;
-  // selected.value = draft; // watcher!
+  // selectedId.value = draft.id;
   mode.value = "details";
 };
 
@@ -83,7 +84,6 @@ const createPlaylist = (draft: Playlist) => {
   draft.id = crypto.randomUUID();
   playlists.value.push(draft);
   selectedId.value = draft.id;
-  // selected.value = draft; // watcher!
   mode.value = "details";
 };
 
