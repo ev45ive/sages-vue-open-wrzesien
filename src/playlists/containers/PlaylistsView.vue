@@ -13,23 +13,24 @@
         </button>
       </div>
       <div class="col">
-        <KeepAlive>
-          <PlaylistDetails
-            :playlist="selected"
-            @edit="showEditor"
-            v-if="mode === 'details'" />
+        <PlaylistDetails
+          :playlist="selected"
+          @edit="showEditor"
+          v-if="mode === 'details'"
+        />
 
-          <PlaylistEditor
-            @cancel="showDetails"
-            @save="savePlaylist($event)"
-            :playlist="selected"
-            v-else-if="mode === 'editor'" />
+        <PlaylistEditor
+          @cancel="showDetails"
+          @save="savePlaylist($event)"
+          :playlist="selected"
+          v-else-if="mode === 'editor'"
+        />
 
-          <PlaylistEditor
-            @cancel="showDetails"
-            @save="createPlaylist($event)"
-            v-else-if="mode === 'creator'"
-        /></KeepAlive>
+        <PlaylistEditor
+          @cancel="showDetails"
+          @save="createPlaylist($event)"
+          v-else-if="mode === 'creator'"
+        />
       </div>
     </div>
   </div>

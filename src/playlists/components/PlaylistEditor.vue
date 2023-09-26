@@ -45,18 +45,7 @@ d
 </template>
 
 <script lang="ts" setup>
-import {
-  ref,
-  watch,
-  onBeforeMount,
-  onMounted,
-  onBeforeUpdate,
-  onUpdated,
-  onBeforeUnmount,
-  onUnmounted,
-  onActivated,
-  onDeactivated,
-} from "vue";
+import { ref, watch } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 
 const props = defineProps<{
@@ -78,6 +67,9 @@ watch(
   }
 );
 
+// TODO: on mouted focus first <input>
+//  on document.getElementById('playlistName').focus()
+
 const $emit = defineEmits<{
   (e: "cancel"): void;
   (e: "save", p: Playlist): void;
@@ -90,14 +82,14 @@ const submit = () => {
   });
 };
 
-onBeforeMount(() => console.log("onBeforeMount"));
-onMounted(() => console.log("onMounted"));
-onBeforeUpdate(() => console.log("onBeforeUpdate"));
-onUpdated(() => console.log("onUpdated"));
-onBeforeUnmount(() => console.log("onBeforeUnmount"));
-onUnmounted(() => console.log("onUnmounted"));
-onActivated(() => console.log("onActivated"));
-onDeactivated(() => console.log("onDeactivated"));
+// onBeforeMount(() => console.log("onBeforeMount"));
+// onMounted(() => console.log("onMounted"));
+// onBeforeUpdate(() => console.log("onBeforeUpdate"));
+// onUpdated(() => console.log("onUpdated"));
+// onBeforeUnmount(() => console.log("onBeforeUnmount"));
+// onUnmounted(() => console.log("onUnmounted"));
+// onActivated(() => console.log("onActivated"));
+// onDeactivated(() => console.log("onDeactivated"));
 </script>
 
 <style scoped></style>
