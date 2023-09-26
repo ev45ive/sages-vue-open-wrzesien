@@ -12,6 +12,7 @@ d
           type="text"
           class="form-control"
           id="playlistName"
+          ref="playlistNameRef"
           v-model="draft.name"
         />
 
@@ -45,7 +46,7 @@ d
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 
 const props = defineProps<{
@@ -67,8 +68,9 @@ watch(
   }
 );
 
-// TODO: on mouted focus first <input>
-//  on document.getElementById('playlistName').focus()
+const playlistNameRef = ref<HTMLInputElement>();
+
+onMounted(() => playlistNameRef.value?.focus());
 
 const $emit = defineEmits<{
   (e: "cancel"): void;
