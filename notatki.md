@@ -87,3 +87,16 @@ touch src/playlists/containers/PlaylistsView.vue
 touch src/playlists/components/PlaylistList.vue
 touch src/playlists/components/PlaylistDetails.vue
 touch src/playlists/components/PlaylistEditor.vue
+
+
+## Search module 
+
+mkdir -p src/search/containers/
+mkdir -p src/search/components/
+
+touch src/search/containers/AlbumSearchView.vue
+touch src/search/containers/AlbumDetailsView.vue
+
+touch src/search/components/SearchForm.vue
+touch src/search/components/ResultsGrid.vue
+touch src/search/components/AlbumCard.vue

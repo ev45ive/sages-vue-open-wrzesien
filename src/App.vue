@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import PlaylistsView from "./playlists/containers/PlaylistsView.vue";
+import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
 
 const title = "MusicApp";
 const isOpen = ref(false);
@@ -14,7 +14,9 @@ const isOpen = ref(false);
       <div class="row">
         <div class="col">
           <h1 class="display-3" @click="isOpen = !isOpen">{{ title }}</h1>
-          <PlaylistsView />
+          <!-- <PlaylistsView /> -->
+
+          <AlbumSearchView />
         </div>
       </div>
     </div>
