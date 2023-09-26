@@ -7,7 +7,11 @@
     </div>
     <div class="row">
       <div class="col">
-        <ResultsGrid :albums="data" />
+        <p class="alert alert-info" v-if="isLoading">Loading</p>
+        <p class="alert alert-danger" v-if="error?.message">
+          {{ error.message }}
+        </p>
+        <ResultsGrid :albums="albums" />
       </div>
     </div>
   </div>
@@ -21,11 +25,9 @@ import SearchForm from "../components/SearchForm.vue";
 
 const query = ref("");
 
-const { data } = useAlbumSearch(query);
+const { data: albums, error, isLoading } = useAlbumSearch(query);
 
-const search = (q: string) => {
-  query.value = q;
-};
+const search = (q: string) => (query.value = q);
 </script>
 
 <style scoped></style>
