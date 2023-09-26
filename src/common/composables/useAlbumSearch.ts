@@ -8,6 +8,7 @@ import { AxiosResponse } from "axios";
 export function useAlbumSearch(query: Ref<string>) {
   //
   return useQuery(
+    // CacheKey:
     ["albums/search", query],
     ({ signal }) =>
       // Axios:
@@ -16,7 +17,9 @@ export function useAlbumSearch(query: Ref<string>) {
         params: { query: query.value, type: "album" },
       }),
     {
+      // immediate: boolean
       enabled: computed(() => !!query.value),
+      // Data
       initialData: { data: { albums: { items: [] } } },
       select: (res: AxiosResponse) => res.data.albums.items,
     }
