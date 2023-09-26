@@ -67,8 +67,47 @@ p2 = echo('Ala','Ups...')
 p3A = p2.then(res => echo(res + ' kota'))
 p3B = p2.then(res => echo(res + ' psa'))
 
-Promise.all([p3A,p3B]).then(console.log) 
+Promise.all([p3A,p3B])
+    .then(console.log)
+    .catch(console.error)
+    .finally()
  
+// Promise {<pending>}
+{/* (2) ['Nikt nie ma  kota', 'Nikt nie ma  psa'] */}
+
+```
+
+## Async/Await  Try/Catch
+
+```js
+
+// p2 = echo('Ala','Ups...')
+//     .then(res => echo(res + ' ma '))
+//     .catch(err => echo('Nikt nie ma '))
+
+// p3A = p2.then(res => echo(res + ' kota'))
+// p3B = p2.then(res => echo(res + ' psa'))
+
+// Promise.all([p3A,p3B]).then(console.log) 
+
+
+async function runPromises() {
+    let b;
+    try{
+        const a = await echo('Ala','Ups..')
+         b = await echo(a + ' ma ')
+    }catch(err){
+         b = await echo('Nikt nie ma ')
+    }
+    
+    const p3A = echo(b + ' kota')
+    const p3B = echo(b + ' psa')
+
+    return [await p3A, await p3B]
+}
+
+runPromises().then(console.log)
+
 // Promise {<pending>}
 {/* (2) ['Nikt nie ma  kota', 'Nikt nie ma  psa'] */}
 
