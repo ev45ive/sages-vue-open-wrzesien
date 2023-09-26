@@ -15,6 +15,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+// https://vueuse.org/shared/watchDebounced/
+
 const $emit = defineEmits<{
   (e: "search", query: string): void;
 }>();
