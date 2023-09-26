@@ -53,7 +53,15 @@ const selected = ref<Playlist | undefined>();
 // y = 2x + b
 watch(
   [selectedId, playlists],
-  ([id, playlists]) => (selected.value = playlists.find((p) => p.id === id)),
+  ([id, playlists], _, onCleanup) => {
+    // selectedId.value = Math.random().toString()  /// : Maximum recursive updates exceeded.
+
+    const handle = setTimeout(() => {
+      selected.value = playlists.find((p) => p.id === id);
+    }, 2000);
+
+    onCleanup(() => clearTimeout(handle)); // cancel previous watch effect
+  },
   {
     immediate: true, // run on mount,
     deep: true,
