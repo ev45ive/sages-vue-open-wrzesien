@@ -42,7 +42,7 @@ import PlaylistDetails from "../components/PlaylistDetails.vue";
 import PlaylistEditor from "../components/PlaylistEditor.vue";
 import PlaylistList from "../components/PlaylistList.vue";
 import { Playlist } from "../../common/model/Playlist";
-import { mockPlaylists } from "../components/mockPlaylists";
+import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 
 const mode = ref<"details" | "editor" | "creator">("details");
 

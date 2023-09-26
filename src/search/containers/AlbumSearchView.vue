@@ -15,9 +15,11 @@
 </template>
 
 <script setup lang="ts">
+import { useAlbumSearch } from '../../common/composables/useAlbumSearch';
 import ResultsGrid from '../components/ResultsGrid.vue';
 import SearchForm from '../components/SearchForm.vue';
 
+// useAlbumSearch('batman')
 
 </script>
 
