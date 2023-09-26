@@ -50,10 +50,13 @@ import { ref, defineProps, defineEmits } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 import { useFocus } from "../../common/composables/useFocus";
 import { useDraftFrom } from "../../common/composables/useDraftFrom";
+import { EMPTY_PLAYLIST } from "../../common/EMPTY_PLAYLIST";
 
 const props = defineProps<{
   playlist?: Playlist;
 }>();
+
+// const wrapped = ref(ref(ref(true))) // Ref<true>
 
 const $emit = defineEmits<{
   (e: "cancel"): void;
@@ -64,12 +67,7 @@ const playlistNameRef = ref<HTMLInputElement>();
 
 const { focused } = useFocus(playlistNameRef, { initialValue: true });
 
-const draft = useDraftFrom(() => props.playlist, {
-  id: "",
-  name: "",
-  description: "",
-  public: false,
-});
+const draft = useDraftFrom(() => props.playlist, EMPTY_PLAYLIST);
 
 const submit = () => $emit("save", draft.value);
 </script>
