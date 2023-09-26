@@ -25,7 +25,13 @@ import SearchForm from "../components/SearchForm.vue";
 
 const query = ref("");
 
-const { data: albums, error, isLoading } = useAlbumSearch(query);
+const {
+  data: albums,
+  error,
+  isLoading,
+  // refetch,
+  // remove,
+} = useAlbumSearch(query);
 
 const search = (q: string) => (query.value = q);
 </script>

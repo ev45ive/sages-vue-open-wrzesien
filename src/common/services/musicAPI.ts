@@ -17,7 +17,7 @@ musicAPI.interceptors.response.use(
 
     if (!isSpotifyErrorResponse(e.response?.data)) throw Error("Unknown Error");
 
-    throw Error(e.response?.data.error.message);
+    throw Error(e.response?.data.error.message, { cause: e });
   }
 );
 

@@ -17,7 +17,7 @@ export function useAlbumSearch(query: Ref<string>) {
         params: { query: query.value, type: "album" },
       }),
     {
-      // immediate: boolean
+      // immediate: true
       enabled: computed(() => !!query.value),
       // Data
       initialData: { data: { albums: { items: [] } } },
