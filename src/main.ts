@@ -9,6 +9,7 @@ import AlbumDetailsView from "./search/containers/AlbumDetailsView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
+  linkActiveClass:'active placki',
   routes: [
     {
       path: "/",
@@ -23,6 +24,7 @@ const router = createRouter({
       children: [
         {
           path: "search",
+          name: "AlbumSearch",
           component: AlbumSearchView,
         },
         {

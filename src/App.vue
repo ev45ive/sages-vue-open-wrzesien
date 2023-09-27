@@ -5,6 +5,7 @@ import { useQueryProvider } from "vue-query";
 import { isAxiosError } from "axios";
 import FetchingIndicator from "./components/FetchingIndicator.vue";
 import PlaylistsView from "./playlists/containers/PlaylistsView.vue";
+import NavBar from "./components/NavBar.vue";
 const title = "MusicApp";
 const isOpen = ref(false);
 
@@ -23,20 +24,20 @@ useQueryProvider({
   },
 });
 
-
 onMounted(() => checkLogin());
 </script>
 
 <template>
   <div>
+    <NavBar />
     <div class="container" v-once>
       <FetchingIndicator />
       <div class="row">
         <div class="col">
           <button class="btn btn-dark float-end" @click="login">Login</button>
           <h1 class="display-3" @click="isOpen = !isOpen">{{ title }}</h1>
-          
-          <RouterView/>
+
+          <RouterView />
         </div>
       </div>
     </div>
