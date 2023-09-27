@@ -1,58 +1,75 @@
 d
 <template>
   <div>
-    <pre>{{ playlist }}</pre>
-    <pre>{{ draft }}</pre>
-    <pre>{{ errors }}</pre>
+    <!-- <pre>{{ playlist }}</pre> -->
+    <!-- <pre>{{ draft }}</pre> -->
+    <!-- <pre>{{ errors }}</pre> -->
 
-    <form @submit.prevent="submit">
+    <Form
+      @submit="submit"
+      :initial-values="props.playlist"
+      :validation-schema="playlistFormSchema"
+      v-slot="{ errors, controlledValues, meta }"
+    >
+      <pre>{{ playlist }}</pre>
+      <pre>{{ controlledValues }}</pre>
+      <pre>{{ errors }}</pre>
+      <pre>{{ meta }}</pre>
+
       <div class="mb-3">
         <label for="playlistName" class="form-label">Name</label>
 
-        <input
+        <Field
           type="text"
           class="form-control"
           id="playlistName"
-          ref="playlistNameRef"
-          v-bind="name"
+          name="name"
+          validate-on-input
         />
+        <ErrorMessage name="name" class="text-danger" />
         <div class="form-text text-muted float-end">
-          {{ draft.name?.length }} / 100
+          {{ controlledValues.name?.length }} / 100
         </div>
-        <p class="text-danger" v-if="errors.name">{{ errors.name }}</p>
+        <!-- <p class="text-danger" v-if="errors.name">{{ errors.name }}</p> -->
       </div>
 
       <div class="mb-3 form-check">
-        <input
+        <Field
           type="checkbox"
           class="form-check-input"
           id="playlistPublic"
-          v-bind="isPublic"
+          name="public"
         />
         <label class="form-check-label" for="playlistPublic">Public</label>
       </div>
 
       <div class="mb-3">
         <label for="playlistDescription" class="form-label">Description</label>
-        <textarea
+        <Field
+          as="textarea"
           class="form-control"
           id="playlistDescription"
           rows="3"
-          v-bind="description"
-        ></textarea>
+          name="description"
+        ></Field>
       </div>
 
       <button class="btn btn-danger" @click="$emit('cancel')">Cancel</button>
       <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </Form>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits } from "vue";
 import { Playlist } from "../../common/model/Playlist";
-import { useFocus } from "../../common/composables/useFocus";
-import { useForm } from "vee-validate";
+import {
+  FormContext,
+  SubmissionHandler,
+  Form,
+  Field,
+  ErrorMessage,
+} from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { z } from "zod";
 import { EMPTY_PLAYLIST } from "../../common/EMPTY_PLAYLIST";
@@ -66,12 +83,9 @@ const $emit = defineEmits<{
   (e: "save", p: Playlist): void;
 }>();
 
-const playlistNameRef = ref<HTMLInputElement>();
-useFocus(playlistNameRef, { initialValue: true });
-
-// Creates a typed schema for vee-validate
 const playlistFormSchema = toTypedSchema(
   z.object({
+    id: z.string(),
     name: z
       .string()
       .nonempty({ message: "Name required" })
@@ -81,37 +95,13 @@ const playlistFormSchema = toTypedSchema(
   })
 );
 
-const { 
-  defineInputBinds,
-  submitForm,
-  controlledValues: draft,
-  errors,
-  meta,
-} = useForm({
-  initialValues: props.playlist || EMPTY_PLAYLIST,
-  validationSchema: playlistFormSchema,
-});
-// watch(()=>props.playlist, () => props.playlist && resetForm(props.playlist));
-
-const name = defineInputBinds("name", { validateOnInput: true });
-const isPublic = defineInputBinds("public", {
-  validateOnInput: true,
-  // Checkbox:
-  mapAttrs(state) {
-    return { checked: state.value };
-  },
-});
-const description = defineInputBinds("description", { validateOnInput: true });
-
-const submit = async (e: Event) => {
-  await submitForm(e);
-  if (!meta.value.valid) return;
-
-  $emit("save", {
+const submit = (values: {}) => {
+  const draft = {
     ...EMPTY_PLAYLIST,
     ...props.playlist,
-    ...draft.value,
-  });
+    ...values,
+  };
+  $emit("save", draft);
 };
 </script>
 
