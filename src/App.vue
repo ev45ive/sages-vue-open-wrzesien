@@ -27,9 +27,9 @@ onMounted(() => checkLogin());
 
 <template>
   <div>
+    <FetchingIndicator />
     <NavBar />
     <div class="container" v-once>
-      <FetchingIndicator />
       <div class="row">
         <div class="col">
           <RouterView />

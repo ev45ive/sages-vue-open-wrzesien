@@ -23,6 +23,7 @@
 
 <script lang="ts">
 import { NavigationGuardWithThis } from "vue-router";
+import { useAlbumSearch } from "../../common/composables/useAlbumSearch";
 
 const loader: NavigationGuardWithThis<any> = async (to, _, next) => {
   let data: any;
@@ -47,26 +48,15 @@ export default defineComponent({
 import ResultsGrid from "../components/ResultsGrid.vue";
 import SearchForm from "../components/SearchForm.vue";
 
-import { useRouter } from "vue-router";
-import { defineComponent, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { defineComponent, computed } from "vue";
 import { musicAPI } from "../../common/services/musicAPI";
 
 const { push } = useRouter();
 
-// Before Nagivate:
-const albums = ref([]);
-const query = ref("");
-
-// Instance(This), Component Public API
-defineExpose({
-  albums: [],
-  query: "",
-});
-
-// After Nagivate:
-// const route = useRoute();
-// const query = computed(() => String(route.query["q"]));
-// const { data: albums, error } = useAlbumSearch(query);
+const route = useRoute();
+const query = computed(() => String(route.query["q"]));
+const { data: albums, error } = useAlbumSearch(query);
 
 const search = (q: string) => {
   push({
