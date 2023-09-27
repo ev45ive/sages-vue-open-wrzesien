@@ -51,6 +51,8 @@ import { ref } from "vue";
 import { RouterLink } from "vue-router";
 import UserProfile from "./UserProfile.vue";
 
+// const user = useUser()
+
 const open = ref(false);
 </script>
 

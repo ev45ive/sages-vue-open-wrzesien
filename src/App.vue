@@ -8,7 +8,7 @@ import NavBar from "./components/NavBar.vue";
 import { useUser } from "./common/composables/useAlbumSearch";
 import UserProvider from "./components/UserProvider.vue";
 
-// Global useQuery cache!
+// // Global useQuery cache!
 useQueryProvider({
   defaultOptions: {
     queries: {
@@ -26,6 +26,7 @@ useQueryProvider({
 
 <template>
   <div>
+    <!-- <QueryClientProvider > -->
     <UserProvider>
       <FetchingIndicator />
       <NavBar />
@@ -37,6 +38,7 @@ useQueryProvider({
         </div>
       </div>
     </UserProvider>
+    <!-- </QueryClientProvider> -->
   </div>
 </template>
 
