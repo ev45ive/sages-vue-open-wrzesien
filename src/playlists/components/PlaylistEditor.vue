@@ -14,12 +14,20 @@ d
           id="playlistName"
           ref="playlistNameRef"
           v-model="draft.name"
+
+          v-bind:a=" name.a "
+          v-bind:b=" name.b "
+          v-bind:c=" name.c "
+          v-bind:d=" name.d "
+
+          v-bind="{value: name.value, id:'test',class:'placki'}"
         />
         {{ focused && "focused!" }}
         <div class="form-text text-muted float-end">
           {{ draft.name.length }} / 100
         </div>
       </div>
+
       <div class="mb-3 form-check">
         <input
           type="checkbox"
@@ -29,6 +37,7 @@ d
         />
         <label class="form-check-label" for="playlistPublic">Public</label>
       </div>
+
       <div class="mb-3">
         <label for="playlistDescription" class="form-label">Description</label>
         <textarea
@@ -39,38 +48,6 @@ d
         ></textarea>
       </div>
 
-      <div class="mb-3">
-        <input type="radio" v-model="picked" value="a" />
-        <input type="radio" v-model="picked" value="b" />
-        {{ picked }}
-      </div>
-
-      <div class="mb-3">
-        <input
-          type="checkbox"
-          v-model="toggle"
-          :true-value=" 'yes' "
-          false-value="no"
-        />
-        {{ toggle }}
-      </div>
-
-      <div class="mb-3">
-        <input type="checkbox" v-model="namesList" value="Jack" /> Jack
-        <input type="checkbox" v-model="namesList" value="Jim" /> Jim
-        <input type="checkbox" v-model="namesList" value="Johnny" /> Johnny
-        {{ namesList }}
-      </div>
-
-      <div class="mb-3">
-        <select v-model="selected" multiple>
-          <option value="abc">ABC</option>
-          <option :value="{x:'cba'}">cba</option>
-          <option value="xyz">xyz</option>
-        </select>
-        {{ selected }}
-      </div>
-
       <button class="btn btn-danger" @click="$emit('cancel')">Cancel</button>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -78,7 +55,7 @@ d
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits } from "vue";
+import { ref, defineProps, defineEmits, computed } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 import { useFocus } from "../../common/composables/useFocus";
 import { useDraftFrom } from "../../common/composables/useDraftFrom";
@@ -87,13 +64,6 @@ import { EMPTY_PLAYLIST } from "../../common/EMPTY_PLAYLIST";
 const props = defineProps<{
   playlist?: Playlist;
 }>();
-
-// const wrapped = ref(ref(ref(true))) // Ref<true>
-
-const picked = ref('a')
-const toggle = ref('yes')
-const namesList = ref(['Jim'])
-const selected = ref(['xyz'])
 
 const $emit = defineEmits<{
   (e: "cancel"): void;
@@ -104,9 +74,15 @@ const playlistNameRef = ref<HTMLInputElement>();
 
 const { focused } = useFocus(playlistNameRef, { initialValue: true });
 
-const draft = useDraftFrom(() => props.playlist, EMPTY_PLAYLIST);
+import { useForm } from "vee-validate";
 
-const submit = () => $emit("save", draft.value);
+const { values: draft, defineInputBinds } = useForm({
+  initialValues: props.playlist,
+});
+
+const name = defineInputBinds("name");
+
+const submit = () => $emit("save", draft);
 </script>
 
 <style scoped></style>
