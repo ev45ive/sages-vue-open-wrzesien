@@ -1,6 +1,9 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-sm bg-body-tertiary">
+    <nav
+      class="navbar navbar-expand-sm bg-body-tertiary mb-3 bg-dark border-bottom border-body"
+      data-bs-theme="dark"
+    >
       <div class="container">
         <RouterLink class="navbar-brand" to="/p">MusicApp</RouterLink>
         <button class="navbar-toggler" type="button" @click="open = !open">
@@ -21,6 +24,9 @@
               >
             </li>
           </ul>
+          <div class="ms-auto d-flex">
+            <button class="btn btn-dark float-end" @click="login">Login</button>
+          </div>
         </div>
       </div>
     </nav>
@@ -30,6 +36,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
+import { login } from "../common/services/Auth";
 
 const open = ref(false);
 </script>

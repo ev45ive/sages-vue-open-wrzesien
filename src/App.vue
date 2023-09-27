@@ -34,9 +34,6 @@ onMounted(() => checkLogin());
       <FetchingIndicator />
       <div class="row">
         <div class="col">
-          <button class="btn btn-dark float-end" @click="login">Login</button>
-          <h1 class="display-3" @click="isOpen = !isOpen">{{ title }}</h1>
-
           <RouterView />
         </div>
       </div>
