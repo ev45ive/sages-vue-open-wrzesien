@@ -44,12 +44,12 @@ d
         <input type="radio" v-model="picked" value="b" />
         {{ picked }}
       </div>
-      
+
       <div class="mb-3">
         <input
           type="checkbox"
           v-model="toggle"
-          true-value="yes"
+          :true-value=" 'yes' "
           false-value="no"
         />
         {{ toggle }}
@@ -65,7 +65,7 @@ d
       <div class="mb-3">
         <select v-model="selected" multiple>
           <option value="abc">ABC</option>
-          <option value="cba">cba</option>
+          <option :value="{x:'cba'}">cba</option>
           <option value="xyz">xyz</option>
         </select>
         {{ selected }}
