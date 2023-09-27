@@ -39,6 +39,35 @@ d
         ></textarea>
       </div>
 
+      <div class="mb-3">
+        <input type="radio" v-model="picked" value="a" />
+        <input type="radio" v-model="picked" value="b" />
+        {{ picked }}
+      </div>
+      <div class="mb-3">
+        <input
+          type="checkbox"
+          v-model="toggle"
+          true-value="yes"
+          false-value="no"
+        />
+        {{ toggle }}
+      </div>
+      <div class="mb-3">
+        <input type="checkbox" v-model="namesList" value="Jack" /> Jack
+        <input type="checkbox" v-model="namesList" value="Jim" /> Jim
+        <input type="checkbox" v-model="namesList" value="Johnny" /> Johnny
+        {{ namesList }}
+      </div>
+      <div class="mb-3">
+        <select v-model="selected">
+          <option value="abc">ABC</option>
+          <option value="cba">cba</option>
+          <option value="xyz">xyz</option>
+        </select>
+        {{ selected }}
+      </div>
+
       <button class="btn btn-danger" @click="$emit('cancel')">Cancel</button>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -57,6 +86,11 @@ const props = defineProps<{
 }>();
 
 // const wrapped = ref(ref(ref(true))) // Ref<true>
+
+const picked = ref('a')
+const toggle = ref('yes')
+const namesList = ref([])
+const selected = ref('xyz')
 
 const $emit = defineEmits<{
   (e: "cancel"): void;

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
 import { checkLogin, login } from "./common/services/Auth";
 import { useQueryProvider } from "vue-query";
 import { isAxiosError } from "axios";
 import FetchingIndicator from './components/FetchingIndicator.vue'
+import PlaylistsView from "./playlists/containers/PlaylistsView.vue";
 const title = "MusicApp";
 const isOpen = ref(false);
 
@@ -34,7 +34,8 @@ onMounted(() => checkLogin());
           <button class="btn btn-dark float-end" @click="login">Login</button>
           <h1 class="display-3" @click="isOpen = !isOpen">{{ title }}</h1>
 
-          <AlbumSearchView />
+          <PlaylistsView/>
+          <!-- <AlbumSearchView /> -->
         </div>
       </div>
     </div>

@@ -44,7 +44,7 @@ import PlaylistList from "../components/PlaylistList.vue";
 import { Playlist } from "../../common/model/Playlist";
 import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 
-const mode = ref<"details" | "editor" | "creator">("details");
+const mode = ref<"details" | "editor" | "creator">("editor");
 
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
