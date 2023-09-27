@@ -6,8 +6,8 @@
       v-model="query"
       v-bind="$attrs"
       />
-      <!-- :placeholder="$attrs['placeholder'] as any || 'Search'" -->
-      
+      <!-- :placeholder="attrs['placeholder'] as any || 'Search'" -->
+    
     <button class="btn btn-outline-secondary" @click="send">Search</button>
  
   </div>
