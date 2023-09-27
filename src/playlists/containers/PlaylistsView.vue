@@ -44,13 +44,13 @@ import PlaylistList from "../components/PlaylistList.vue";
 import { Playlist } from "../../common/model/Playlist";
 import { mockPlaylists } from "../../common/fixtures/mockPlaylists";
 
-const mode = ref<"details" | "editor" | "creator">("editor");
+const mode = ref<"details" | "editor" | "creator">("details");
 
 const showDetails = () => (mode.value = "details");
 const showEditor = () => (mode.value = "editor");
 
 const playlists = ref<Playlist[]>(mockPlaylists);
-const selectedId = ref<Playlist["id"] | undefined>("123");
+const selectedId = ref<Playlist["id"] | undefined>("");
 
 const selected = computed(() =>
   playlists.value.find((p) => p.id === selectedId.value)

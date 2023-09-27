@@ -114,3 +114,6 @@ https://github.com/colinhacks/zod#objects
 https://vueuse.org/core/useFetch/#usefetch
 https://vue-query.vercel.app/#/guides/queries
 
+
+## Modals, Portals, Slots
+https://portal-vue.linusb.org/guide/getting-started.html
