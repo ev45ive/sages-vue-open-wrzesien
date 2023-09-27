@@ -12,14 +12,17 @@
           <AlbumCard :album="album" />
         </div>
         <div class="col">
-          <dl>
-            <dt>Artist</dt>
-            <dd>{{ album.artists[0].name }}</dd>
-            <dt>Release date</dt>
-            <dd>{{ album.release_date }}</dd>
-            <dt>Tracks</dt>
-            <dd>{{ album.total_tracks }}</dd>
-          </dl>
+          
+          <Card>
+            <dl>
+              <dt>Artist</dt>
+              <dd>{{ album.artists[0].name }}</dd>
+              <dt>Release date</dt>
+              <dd>{{ album.release_date }}</dd>
+              <dt>Tracks</dt>
+              <dd>{{ album.total_tracks }}</dd>
+            </dl>
+          </Card>
 
           <audio
             class="w-100 my-2"
@@ -52,6 +55,7 @@ import AlbumCard from "../components/AlbumCard.vue";
 import { useAlbum } from "../../common/composables/useAlbumSearch";
 import { computed, nextTick, reactive, ref } from "vue";
 import { Track } from "../../common/model/Album";
+import Card from "../../components/Card.vue";
 
 // http://localhost:5173/music/albums/5Tby0U5VndHW0SomYO7Id7
 

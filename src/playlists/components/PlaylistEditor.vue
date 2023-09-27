@@ -1,19 +1,13 @@
 d
 <template>
-  <div>
-    <Form
-      @submit="submit"
-      :initial-values="props.playlist"
-      :validation-schema="playlistFormSchema"
-      v-slot="{ errors, controlledValues, meta }"
-    >
-<!-- const {errors, controlledValues, meta} = useForm({initialValue:props.playlist, :validationSchema="playlistFormSchema" }) -->
-
-      <!-- <pre>{{ playlist }}</pre>
-      <pre>{{ controlledValues }}</pre>
-      <pre>{{ errors }}</pre>
-      <pre>{{ meta }}</pre> -->
-
+  <Form
+    @submit="submit"
+    :initial-values="props.playlist"
+    :validation-schema="playlistFormSchema"
+    v-slot="{ errors, controlledValues, meta }"
+  >
+    <!-- v-slot:default="{ errors, controlledValues, meta }" -->
+    <Card v-if="playlist">
       <div class="mb-3">
         <label for="playlistName" class="form-label">Name</label>
 
@@ -51,10 +45,13 @@ d
         ></Field>
       </div>
 
-      <button class="btn btn-danger" @click="$emit('cancel')">Cancel</button>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </Form>
-  </div>
+      <!-- <template v-slot:footer> -->
+      <template #footer>
+        <button class="btn btn-danger" @click="$emit('cancel')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </template>
+    </Card>
+  </Form>
 </template>
 
 <script lang="ts" setup>
@@ -64,6 +61,7 @@ import { Form, Field, ErrorMessage } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { z } from "zod";
 import { EMPTY_PLAYLIST } from "../../common/EMPTY_PLAYLIST";
+import Card from "../../components/Card.vue";
 
 const props = defineProps<{
   playlist?: Playlist;
