@@ -3,8 +3,9 @@ import { onMounted, ref } from "vue";
 import { checkLogin, login } from "./common/services/Auth";
 import { useQueryProvider } from "vue-query";
 import { isAxiosError } from "axios";
-import FetchingIndicator from './components/FetchingIndicator.vue'
+import FetchingIndicator from "./components/FetchingIndicator.vue";
 import PlaylistsView from "./playlists/containers/PlaylistsView.vue";
+import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
 const title = "MusicApp";
 const isOpen = ref(false);
 
@@ -12,6 +13,7 @@ const isOpen = ref(false);
 useQueryProvider({
   defaultOptions: {
     queries: {
+      staleTime: 3000,
       retry(failureCount: number, error: Error) {
         if (failureCount >= 3) return false;
         if (isAxiosError(error.cause) && error.cause.response?.status == 500)
@@ -34,8 +36,8 @@ onMounted(() => checkLogin());
           <button class="btn btn-dark float-end" @click="login">Login</button>
           <h1 class="display-3" @click="isOpen = !isOpen">{{ title }}</h1>
 
-          <PlaylistsView/>
-          <!-- <AlbumSearchView /> -->
+          <!-- <PlaylistsView/> -->
+          <AlbumSearchView />
         </div>
       </div>
     </div>

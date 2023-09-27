@@ -13,14 +13,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { watchDebounced } from "@vueuse/core";
 
+const props = defineProps<{ query: string }>();
 const $emit = defineEmits<{
   (e: "search", query: string): void;
 }>();
 
-const query = ref("");
+const query = ref(props.query);
+
+watch(
+  () => props.query,
+  (q) => (query.value = q)
+);
 
 watchDebounced(query, (q) => $emit("search", q), { debounce: 500 });
 

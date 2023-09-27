@@ -2,12 +2,13 @@
   <div>
     <div class="row">
       <div class="col">
-        <SearchForm @search="search($event)" />
+        <SearchForm 
+          @search="search($event)" 
+          :query="query" />
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <!--  -->
         <p class="alert alert-danger" v-if="error?.message">
           {{ error.message }}
         </p>
@@ -23,7 +24,7 @@ import { useAlbumSearch } from "../../common/composables/useAlbumSearch";
 import ResultsGrid from "../components/ResultsGrid.vue";
 import SearchForm from "../components/SearchForm.vue";
 
-const query = ref("");
+const query = ref("batman");
 
 const { data: albums, error } = useAlbumSearch(query);
 

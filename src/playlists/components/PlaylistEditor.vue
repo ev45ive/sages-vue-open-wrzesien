@@ -9,10 +9,10 @@ d
     >
 <!-- const {errors, controlledValues, meta} = useForm({initialValue:props.playlist, :validationSchema="playlistFormSchema" }) -->
 
-      <pre>{{ playlist }}</pre>
+      <!-- <pre>{{ playlist }}</pre>
       <pre>{{ controlledValues }}</pre>
       <pre>{{ errors }}</pre>
-      <pre>{{ meta }}</pre>
+      <pre>{{ meta }}</pre> -->
 
       <div class="mb-3">
         <label for="playlistName" class="form-label">Name</label>
