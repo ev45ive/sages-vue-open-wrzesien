@@ -1,11 +1,11 @@
-import { Ref, computed } from "vue";
+import { ComputedRef, Ref, computed } from "vue";
 // import { AlbumSearchResponse, PagingObject } from "../model/Album";
 import { useQuery } from "vue-query";
 import { musicAPI } from "../services/musicAPI";
 import { AlbumSearchResponse } from "../model/Album";
 import { AxiosResponse } from "axios";
 
-export function useAlbumSearch(query: Ref<string>) {
+export function useAlbumSearch(query: Ref<string> | ComputedRef<string>) {
   return useQuery(
     ["albums/search", query],
     ({ signal }) =>

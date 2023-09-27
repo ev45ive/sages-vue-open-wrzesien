@@ -27,20 +27,12 @@ import ResultsGrid from "../components/ResultsGrid.vue";
 import SearchForm from "../components/SearchForm.vue";
 
 import { useRoute, useRouter } from "vue-router";
-import { ref, watch } from "vue";
-
-const query = ref("");
+import { computed } from "vue";
 
 const { push } = useRouter();
 const route = useRoute();
 
-watch(
-  () => route.query["q"],
-  (q) => (query.value = String(q)),
-  {
-    immediate: true,
-  }
-);
+const query = computed(() => String(route.query["q"]));
 
 const { data: albums, error } = useAlbumSearch(query);
 
