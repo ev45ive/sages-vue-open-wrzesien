@@ -5,6 +5,7 @@ import { musicAPI } from "../services/musicAPI";
 import { AlbumResponse, AlbumSearchResponse } from "../model/Album";
 import { AxiosResponse } from "axios";
 import { UserProfile } from "../model/User";
+import { mockPlaylists } from "../fixtures/mockPlaylists";
 
 export function useAlbumSearch(query: Ref<string> | ComputedRef<string>) {
   return useQuery(
@@ -37,6 +38,10 @@ export function useUser(): UseQueryReturnType<UserProfile, Error> {
   return useQuery(["user/me"], ({}) =>
     musicAPI.get<UserProfile>("me", {}).then((res) => res.data)
   );
+}
+
+export function usePlaylist(id: string) {
+  return computed(() => mockPlaylists[2]);
 }
 
 // export function useAlbumSearch(query: Ref<string>) {

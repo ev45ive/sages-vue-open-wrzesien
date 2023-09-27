@@ -21,13 +21,18 @@
     <button class="btn btn-primary" @click="$emit('edit', playlist.id)">
       Edit
     </button>
+
+    {{ p.name }}
   </Card>
   <p v-else class="alert alert-info">No playlist selected</p>
 </template>
 
 <script lang="ts" setup>
+import { usePlaylist } from "../../common/composables/useAlbumSearch";
 import { Playlist } from "../../common/model/Playlist";
 import Card from "../../components/Card.vue";
+
+const p = usePlaylist("123");
 
 defineProps<{
   playlist?: Playlist;
