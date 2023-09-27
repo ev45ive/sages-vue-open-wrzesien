@@ -1,5 +1,7 @@
 <template>
   <slot v-bind="{ user, login, logout }"></slot>
+
+  <!-- {{ $slots.default({ user, login, logout }) }} -->
 </template>
 
 <script setup lang="ts">
