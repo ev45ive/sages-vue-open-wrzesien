@@ -26,12 +26,28 @@ import { useAlbumSearch } from "../../common/composables/useAlbumSearch";
 import ResultsGrid from "../components/ResultsGrid.vue";
 import SearchForm from "../components/SearchForm.vue";
 
-import { useRoute, useRouter } from "vue-router";
+import {
+  useRoute,
+  useRouter,
+  onBeforeRouteLeave,
+  onBeforeRouteUpdate,
+} from "vue-router";
 import { computed } from "vue";
 
+defineExpose({
+  placki: 123,
+});
 const { push } = useRouter();
-const route = useRoute();
 
+onBeforeRouteUpdate((to, from, next) => {
+  next()
+});
+
+onBeforeRouteLeave((to, from, next) => {
+next({name:'Login'})
+});
+
+const route = useRoute();
 const query = computed(() => String(route.query["q"]));
 
 const { data: albums, error } = useAlbumSearch(query);

@@ -1,16 +1,15 @@
 import { createApp } from "vue";
 import "bootstrap/dist/css/bootstrap.css";
 import App from "./App.vue";
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import PlaylistsView from "./playlists/containers/PlaylistsView.vue";
 import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
 import AlbumDetailsView from "./search/containers/AlbumDetailsView.vue";
 // const routes:RouteRecordRaw[] = [];
 
-
 const router = createRouter({
   history: createWebHistory(),
-  linkActiveClass:'active placki',
+  linkActiveClass: "active placki",
   routes: [
     {
       path: "/",
@@ -27,6 +26,14 @@ const router = createRouter({
           path: "search",
           name: "AlbumSearch",
           component: AlbumSearchView,
+          props: { title: "Placki" },
+          async beforeEnter(to, from, next) {
+            // String(to.query["q"]);
+            // next({name:'Login'})
+            // next(new Error(''))
+            debugger;
+            next(true);
+          },
         },
         {
           path: "albums/:albumId",
@@ -35,6 +42,15 @@ const router = createRouter({
       ],
     },
   ],
+});
+
+router.afterEach((to, from, failure) => {
+  // if (isNavigationFailure(failure)) {
+  //   console.log("failed navigation", failure);
+  // }
+});
+router.beforeEach((to, from, next) => {
+  next();
 });
 
 const app = createApp(App).use(router);
