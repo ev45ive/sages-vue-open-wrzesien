@@ -24,9 +24,7 @@
               >
             </li>
           </ul>
-          <div class="ms-auto d-flex">
-            <button class="btn btn-dark float-end" @click="login">Login</button>
-          </div>
+          <UserProfile />
         </div>
       </div>
     </nav>
@@ -36,7 +34,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
-import { login } from "../common/services/Auth";
+import UserProfile from "./UserProfile.vue";
 
 const open = ref(false);
 </script>

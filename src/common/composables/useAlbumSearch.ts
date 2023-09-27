@@ -4,6 +4,7 @@ import { UseQueryReturnType, useQuery } from "vue-query";
 import { musicAPI } from "../services/musicAPI";
 import { AlbumResponse, AlbumSearchResponse } from "../model/Album";
 import { AxiosResponse } from "axios";
+import { UserProfile } from "../model/User";
 
 export function useAlbumSearch(query: Ref<string> | ComputedRef<string>) {
   return useQuery(
@@ -21,7 +22,6 @@ export function useAlbumSearch(query: Ref<string> | ComputedRef<string>) {
   );
 }
 
-
 export function useAlbum(
   id: Ref<string> | ComputedRef<string>
 ): UseQueryReturnType<AlbumResponse, Error> {
@@ -31,6 +31,11 @@ export function useAlbum(
         signal,
       })
       .then((res) => res.data)
+  );
+}
+export function useUser(): UseQueryReturnType<UserProfile, Error> {
+  return useQuery(["user/me"], ({}) =>
+    musicAPI.get<UserProfile>("me", {}).then((res) => res.data)
   );
 }
 

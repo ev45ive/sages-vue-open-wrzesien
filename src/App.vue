@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { checkLogin } from "./common/services/Auth";
+import { onMounted, provide } from "vue";
+import { checkLogin, login, logout } from "./common/services/Auth";
 import { useQueryProvider } from "vue-query";
 import { isAxiosError } from "axios";
 import FetchingIndicator from "./components/FetchingIndicator.vue";
 import NavBar from "./components/NavBar.vue";
-import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
+import { useUser } from "./common/composables/useAlbumSearch";
 
 // Global useQuery cache!
 useQueryProvider({
@@ -23,6 +23,15 @@ useQueryProvider({
 });
 
 onMounted(() => checkLogin());
+
+const { data: user } = useUser();
+
+// TIP: always provide ref/computed
+provide("USER", {
+  user,
+  login,
+  logout,
+});
 </script>
 
 <template>
@@ -33,9 +42,6 @@ onMounted(() => checkLogin());
       <div class="row">
         <div class="col">
           <RouterView />
-
-          <!-- <AlbumSearchView ref="compREf"/>
-          compREf.value.albums -->
         </div>
       </div>
     </div>
