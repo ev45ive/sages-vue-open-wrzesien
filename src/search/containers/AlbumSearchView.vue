@@ -6,10 +6,8 @@
           class="form-control"
           placeholder="Search"
           @search="search($event)"
-          v-model="query"
+          :query="query"
         />
-        
-        <CreditCardInput v-model="cc" />
       </div>
     </div>
     <div class="row">
