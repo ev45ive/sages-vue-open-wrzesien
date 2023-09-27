@@ -7,6 +7,7 @@ import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
 import AlbumDetailsView from "./search/containers/AlbumDetailsView.vue";
 // const routes:RouteRecordRaw[] = [];
 
+
 const router = createRouter({
   history: createWebHistory(),
   linkActiveClass:'active placki',

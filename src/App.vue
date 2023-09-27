@@ -1,19 +1,16 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { checkLogin, login } from "./common/services/Auth";
+import { onMounted } from "vue";
+import { checkLogin } from "./common/services/Auth";
 import { useQueryProvider } from "vue-query";
 import { isAxiosError } from "axios";
 import FetchingIndicator from "./components/FetchingIndicator.vue";
-import PlaylistsView from "./playlists/containers/PlaylistsView.vue";
 import NavBar from "./components/NavBar.vue";
-const title = "MusicApp";
-const isOpen = ref(false);
 
 // Global useQuery cache!
 useQueryProvider({
   defaultOptions: {
     queries: {
-      staleTime: 3000,
+      // staleTime: 3000,
       retry(failureCount: number, error: Error) {
         if (failureCount >= 3) return false;
         if (isAxiosError(error.cause) && error.cause.response?.status == 500)

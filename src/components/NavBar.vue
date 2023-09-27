@@ -5,7 +5,7 @@
       data-bs-theme="dark"
     >
       <div class="container">
-        <RouterLink class="navbar-brand" to="/p">MusicApp</RouterLink>
+        <RouterLink class="navbar-brand" to="/">MusicApp</RouterLink>
         <button class="navbar-toggler" type="button" @click="open = !open">
           <span class="navbar-toggler-icon"></span>
         </button>
