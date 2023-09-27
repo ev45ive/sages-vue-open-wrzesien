@@ -24,6 +24,9 @@ useQueryProvider({
   },
 });
 
+const currentView = PlaylistsView;
+// const currentView = AlbumSearchView
+
 onMounted(() => checkLogin());
 </script>
 
@@ -36,8 +39,8 @@ onMounted(() => checkLogin());
           <button class="btn btn-dark float-end" @click="login">Login</button>
           <h1 class="display-3" @click="isOpen = !isOpen">{{ title }}</h1>
 
-          <!-- <PlaylistsView/> -->
-          <AlbumSearchView />
+          <KeepAlive> <component :is="currentView" v-bind="{}" v-on="{}" />
+          </KeepAlive>
         </div>
       </div>
     </div>
