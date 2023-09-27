@@ -21,23 +21,47 @@
   </div>
 </template>
 
+<script lang="ts">
+import { NavigationGuardWithThis } from "vue-router";
+
+const loader: NavigationGuardWithThis<any> = async (to, _, next) => {
+  const { data } = await musicAPI.get("search", {
+    params: { type: "album", q: to.query["q"] },
+  });
+  next((comp) => {
+    comp.query = String(to.query["q"]);
+    comp.albums = data;
+  });
+};
+
+export default defineComponent({
+  beforeRouteEnter: loader,
+  beforeRouteUpdate: loader,
+});
+</script>
+
 <script setup lang="ts">
-import { useAlbumSearch } from "../../common/composables/useAlbumSearch";
 import ResultsGrid from "../components/ResultsGrid.vue";
 import SearchForm from "../components/SearchForm.vue";
 
-import { useRoute, useRouter } from "vue-router";
-import { computed } from "vue";
+import { useRouter } from "vue-router";
+import { defineComponent, ref } from "vue";
+import { musicAPI } from "../../common/services/musicAPI";
 
-defineExpose({
-  placki: 123,
-});
 const { push } = useRouter();
 
-const route = useRoute();
-const query = computed(() => String(route.query["q"]));
+// Before Nagivate:
+const albums = ref([]);
+const query = ref("");
+defineExpose({
+  albums: [],
+  query: "",
+});
 
-const { data: albums, error } = useAlbumSearch(query);
+// After Nagivate:
+// const route = useRoute();
+// const query = computed(() => String(route.query["q"]));
+// const { data: albums, error } = useAlbumSearch(query);
 
 const search = (q: string) => {
   push({
