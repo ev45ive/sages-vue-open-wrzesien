@@ -56,6 +56,8 @@ const { push } = useRouter();
 // Before Nagivate:
 const albums = ref([]);
 const query = ref("");
+
+// Instance(This), Component Public API
 defineExpose({
   albums: [],
   query: "",

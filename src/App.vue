@@ -5,6 +5,7 @@ import { useQueryProvider } from "vue-query";
 import { isAxiosError } from "axios";
 import FetchingIndicator from "./components/FetchingIndicator.vue";
 import NavBar from "./components/NavBar.vue";
+import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
 
 // Global useQuery cache!
 useQueryProvider({
@@ -32,6 +33,9 @@ onMounted(() => checkLogin());
       <div class="row">
         <div class="col">
           <RouterView />
+
+          <!-- <AlbumSearchView ref="compREf"/>
+          compREf.value.albums -->
         </div>
       </div>
     </div>
