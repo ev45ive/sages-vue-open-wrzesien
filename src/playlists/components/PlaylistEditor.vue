@@ -3,6 +3,7 @@ d
   <div>
     <pre>{{ playlist }}</pre>
     <pre>{{ draft }}</pre>
+    <pre>{{ errors }}</pre>
 
     <form @submit.prevent="submit">
       <div class="mb-3">
@@ -13,19 +14,12 @@ d
           class="form-control"
           id="playlistName"
           ref="playlistNameRef"
-          v-model="draft.name"
-
-          v-bind:a=" name.a "
-          v-bind:b=" name.b "
-          v-bind:c=" name.c "
-          v-bind:d=" name.d "
-
-          v-bind="{value: name.value, id:'test',class:'placki'}"
+          v-bind="name"
         />
-        {{ focused && "focused!" }}
         <div class="form-text text-muted float-end">
-          {{ draft.name.length }} / 100
+          {{ draft.name?.length }} / 100
         </div>
+        <p class="text-danger" v-if="errors.name">{{ errors.name }}</p>
       </div>
 
       <div class="mb-3 form-check">
@@ -33,7 +27,7 @@ d
           type="checkbox"
           class="form-check-input"
           id="playlistPublic"
-          v-model="draft.public"
+          v-bind="isPublic"
         />
         <label class="form-check-label" for="playlistPublic">Public</label>
       </div>
@@ -44,7 +38,7 @@ d
           class="form-control"
           id="playlistDescription"
           rows="3"
-          v-model="draft.description"
+          v-bind="description"
         ></textarea>
       </div>
 
@@ -55,10 +49,12 @@ d
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits, computed } from "vue";
+import { ref, defineProps, defineEmits } from "vue";
 import { Playlist } from "../../common/model/Playlist";
 import { useFocus } from "../../common/composables/useFocus";
-import { useDraftFrom } from "../../common/composables/useDraftFrom";
+import { useForm } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/zod";
+import { z } from "zod";
 import { EMPTY_PLAYLIST } from "../../common/EMPTY_PLAYLIST";
 
 const props = defineProps<{
@@ -71,18 +67,52 @@ const $emit = defineEmits<{
 }>();
 
 const playlistNameRef = ref<HTMLInputElement>();
+useFocus(playlistNameRef, { initialValue: true });
 
-const { focused } = useFocus(playlistNameRef, { initialValue: true });
+// Creates a typed schema for vee-validate
+const playlistFormSchema = toTypedSchema(
+  z.object({
+    name: z
+      .string()
+      .nonempty({ message: "Name required" })
+      .min(3, { message: "Name too short" }),
+    public: z.boolean(),
+    description: z.string(),
+  })
+);
 
-import { useForm } from "vee-validate";
-
-const { values: draft, defineInputBinds } = useForm({
-  initialValues: props.playlist,
+const { 
+  defineInputBinds,
+  submitForm,
+  controlledValues: draft,
+  errors,
+  meta,
+} = useForm({
+  initialValues: props.playlist || EMPTY_PLAYLIST,
+  validationSchema: playlistFormSchema,
 });
+// watch(()=>props.playlist, () => props.playlist && resetForm(props.playlist));
 
-const name = defineInputBinds("name");
+const name = defineInputBinds("name", { validateOnInput: true });
+const isPublic = defineInputBinds("public", {
+  validateOnInput: true,
+  // Checkbox:
+  mapAttrs(state) {
+    return { checked: state.value };
+  },
+});
+const description = defineInputBinds("description", { validateOnInput: true });
 
-const submit = () => $emit("save", draft);
+const submit = async (e: Event) => {
+  await submitForm(e);
+  if (!meta.value.valid) return;
+
+  $emit("save", {
+    ...EMPTY_PLAYLIST,
+    ...props.playlist,
+    ...draft.value,
+  });
+};
 </script>
 
 <style scoped></style>
