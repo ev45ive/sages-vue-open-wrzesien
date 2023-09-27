@@ -1,61 +1,14 @@
 import { createApp } from "vue";
 import "bootstrap/dist/css/bootstrap.css";
 import App from "./App.vue";
-import { createRouter, createWebHistory } from "vue-router";
-import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
-import AlbumDetailsView from "./search/containers/AlbumDetailsView.vue";
-// const routes:RouteRecordRaw[] = [];
 
-const PlaylistsView = () => import("./playlists/containers/PlaylistsView.vue");
+import { router } from "./router";
+import { store } from "./store";
 
-const router = createRouter({
-  history: createWebHistory(),
-  linkActiveClass: "active placki",
-  routes: [
-    {
-      path: "/",
-      redirect: "/music/search",
-    },
-    {
-      path: "/playlists",
-      component: PlaylistsView,
-    },
-    {
-      path: "/music",
-      children: [
-        {
-          path: "search",
-          name: "AlbumSearch",
-          component: AlbumSearchView,
-          props: { title: "Placki" },
-          // async beeEnter(to, from, next) {
-          //   // String(to.query["q"]);
-          //   // next({name:'Login'})
-          //   // next(new Error(''))
-          //   debugger;
-          //   next(true);
-          // },for
-        },
-        {
-          path: "albums/:albumId",
-          name: "AlbumDetails",
-          component: AlbumDetailsView,
-        },
-      ],
-    },
-  ],
-});
+const app = createApp(App);
 
-// router.afterEach((to, from, failure) => {
-//   // if (isNavigationFailure(failure)) {
-//   //   console.log("failed navigation", failure);
-//   // }
-// });
-// router.beforeEach((to, from, next) => {
-//   next();
-// });
-
-const app = createApp(App).use(router);
+app.use(router);
+app.use(store);
 
 app.mount("#app");
 

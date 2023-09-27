@@ -7,6 +7,7 @@ import FetchingIndicator from "./components/FetchingIndicator.vue";
 import NavBar from "./components/NavBar.vue";
 import { useUser } from "./common/composables/useAlbumSearch";
 import UserProvider from "./components/UserProvider.vue";
+import Counter from "./components/Counter.vue";
 
 // // Global useQuery cache!
 useQueryProvider({
@@ -36,6 +37,7 @@ useQueryProvider({
             <RouterView />
           </div>
         </div>
+        <Counter counterId="123" />
       </div>
     </UserProvider>
     <!-- </QueryClientProvider> -->
