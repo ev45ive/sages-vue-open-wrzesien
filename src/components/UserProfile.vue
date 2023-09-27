@@ -12,16 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, inject } from "vue";
-import { UserProfile } from "../common/model/User";
+import { inject } from "vue";
+import { USER_TOKEN } from "./tokens";
 
-const {
-  value: { user, login, logout },
-} = inject("USER") as Ref<{
-  user: UserProfile;
-  login: () => void;
-  logout: () => void;
-}>;
+const userContext = inject(USER_TOKEN);
+if (!userContext) throw new Error("missing user Context provider");
+
+const { user, login, logout } = userContext;
 </script>
 
 <style scoped></style>

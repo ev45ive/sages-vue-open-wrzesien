@@ -6,6 +6,7 @@ import { isAxiosError } from "axios";
 import FetchingIndicator from "./components/FetchingIndicator.vue";
 import NavBar from "./components/NavBar.vue";
 import { useUser } from "./common/composables/useAlbumSearch";
+import UserProvider from "./components/UserProvider.vue";
 
 // Global useQuery cache!
 useQueryProvider({
@@ -21,30 +22,21 @@ useQueryProvider({
     },
   },
 });
-
-onMounted(() => checkLogin());
-
-const { data: user } = useUser();
-
-// TIP: always provide ref/computed
-provide("USER", {
-  user,
-  login,
-  logout,
-});
 </script>
 
 <template>
   <div>
-    <FetchingIndicator />
-    <NavBar />
-    <div class="container" v-once>
-      <div class="row">
-        <div class="col">
-          <RouterView />
+    <UserProvider>
+      <FetchingIndicator />
+      <NavBar />
+      <div class="container" v-once>
+        <div class="row">
+          <div class="col">
+            <RouterView />
+          </div>
         </div>
       </div>
-    </div>
+    </UserProvider>
   </div>
 </template>
 
