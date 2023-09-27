@@ -44,6 +44,7 @@ d
         <input type="radio" v-model="picked" value="b" />
         {{ picked }}
       </div>
+      
       <div class="mb-3">
         <input
           type="checkbox"
@@ -53,14 +54,16 @@ d
         />
         {{ toggle }}
       </div>
+
       <div class="mb-3">
         <input type="checkbox" v-model="namesList" value="Jack" /> Jack
         <input type="checkbox" v-model="namesList" value="Jim" /> Jim
         <input type="checkbox" v-model="namesList" value="Johnny" /> Johnny
         {{ namesList }}
       </div>
+
       <div class="mb-3">
-        <select v-model="selected">
+        <select v-model="selected" multiple>
           <option value="abc">ABC</option>
           <option value="cba">cba</option>
           <option value="xyz">xyz</option>
@@ -89,8 +92,8 @@ const props = defineProps<{
 
 const picked = ref('a')
 const toggle = ref('yes')
-const namesList = ref([])
-const selected = ref('xyz')
+const namesList = ref(['Jim'])
+const selected = ref(['xyz'])
 
 const $emit = defineEmits<{
   (e: "cancel"): void;
