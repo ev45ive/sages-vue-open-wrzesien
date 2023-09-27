@@ -6,8 +6,9 @@
           class="form-control"
           placeholder="Search"
           @search="search($event)"
-          :query="query"
+          v-model="query"
         />
+        {{ query }}
       </div>
     </div>
     <div class="row">
