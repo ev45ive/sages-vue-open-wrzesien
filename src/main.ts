@@ -1,10 +1,42 @@
 import { createApp } from "vue";
 import "bootstrap/dist/css/bootstrap.css";
 import App from "./App.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import PlaylistsView from "./playlists/containers/PlaylistsView.vue";
+import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
+import AlbumDetailsView from "./search/containers/AlbumDetailsView.vue";
+// const routes:RouteRecordRaw[] = [];
 
- createApp(App).mount("#app")
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {
+      path: "/",
+      redirect: "/music/search",
+    },
+    {
+      path: "/playlists",
+      component: PlaylistsView,
+    },
+    {
+      path: "/music",
+      children: [
+        {
+          path: "search",
+          component: AlbumSearchView,
+        },
+        {
+          path: "albums/:albumId",
+          component: AlbumDetailsView,
+        },
+      ],
+    },
+  ],
+});
 
+const app = createApp(App).use(router);
 
+app.mount("#app");
 
 /* (window as any).app = createApp({
   // Component provided template option but runtime compilation is not supported in this build of Vue.

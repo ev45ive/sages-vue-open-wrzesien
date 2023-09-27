@@ -5,7 +5,6 @@ import { useQueryProvider } from "vue-query";
 import { isAxiosError } from "axios";
 import FetchingIndicator from "./components/FetchingIndicator.vue";
 import PlaylistsView from "./playlists/containers/PlaylistsView.vue";
-import AlbumSearchView from "./search/containers/AlbumSearchView.vue";
 const title = "MusicApp";
 const isOpen = ref(false);
 
@@ -24,8 +23,6 @@ useQueryProvider({
   },
 });
 
-const currentView = PlaylistsView;
-// const currentView = AlbumSearchView
 
 onMounted(() => checkLogin());
 </script>
@@ -38,9 +35,8 @@ onMounted(() => checkLogin());
         <div class="col">
           <button class="btn btn-dark float-end" @click="login">Login</button>
           <h1 class="display-3" @click="isOpen = !isOpen">{{ title }}</h1>
-
-          <KeepAlive> <component :is="currentView" v-bind="{}" v-on="{}" />
-          </KeepAlive>
+          
+          <RouterView/>
         </div>
       </div>
     </div>
