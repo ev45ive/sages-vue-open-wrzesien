@@ -2,9 +2,12 @@
   <div>
     <div class="row">
       <div class="col">
-        <SearchForm 
-          @search="search($event)" 
-          :query="query" />
+        <SearchForm
+          class="form-control"
+          placeholder="Search"
+          @search="search($event)"
+          :query="query"
+        />
       </div>
     </div>
     <div class="row">

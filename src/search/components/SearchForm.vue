@@ -1,21 +1,26 @@
 <template>
-  <form @submit.prevent="send">
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search"
-        v-model="query"
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      v-model="query"
+      v-bind="$attrs"
       />
-      <button class="btn btn-outline-secondary" type="submit">Search</button>
-    </div>
-  </form>
+      <!-- :placeholder="$attrs['placeholder'] as any || 'Search'" -->
+      
+    <button class="btn btn-outline-secondary" @click="send">Search</button>
+ 
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, useAttrs, watch } from "vue";
 import { watchDebounced } from "@vueuse/core";
 
+defineOptions({
+  inheritAttrs:false,
+})
+const $attrs = useAttrs()
 const props = defineProps<{ query: string }>();
 const $emit = defineEmits<{
   (e: "search", query: string): void;
