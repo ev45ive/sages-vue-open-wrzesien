@@ -1,16 +1,14 @@
 d
 <template>
   <div>
-    <!-- <pre>{{ playlist }}</pre> -->
-    <!-- <pre>{{ draft }}</pre> -->
-    <!-- <pre>{{ errors }}</pre> -->
-
     <Form
       @submit="submit"
       :initial-values="props.playlist"
       :validation-schema="playlistFormSchema"
       v-slot="{ errors, controlledValues, meta }"
     >
+<!-- const {errors, controlledValues, meta} = useForm({initialValue:props.playlist, :validationSchema="playlistFormSchema" }) -->
+
       <pre>{{ playlist }}</pre>
       <pre>{{ controlledValues }}</pre>
       <pre>{{ errors }}</pre>
@@ -30,7 +28,6 @@ d
         <div class="form-text text-muted float-end">
           {{ controlledValues.name?.length }} / 100
         </div>
-        <!-- <p class="text-danger" v-if="errors.name">{{ errors.name }}</p> -->
       </div>
 
       <div class="mb-3 form-check">
@@ -63,13 +60,7 @@ d
 <script lang="ts" setup>
 import { defineProps, defineEmits } from "vue";
 import { Playlist } from "../../common/model/Playlist";
-import {
-  FormContext,
-  SubmissionHandler,
-  Form,
-  Field,
-  ErrorMessage,
-} from "vee-validate";
+import { Form, Field, ErrorMessage } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { z } from "zod";
 import { EMPTY_PLAYLIST } from "../../common/EMPTY_PLAYLIST";
