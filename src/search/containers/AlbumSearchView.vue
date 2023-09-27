@@ -8,7 +8,8 @@
           @search="search($event)"
           v-model="query"
         />
-        {{ query }}
+        
+        <CreditCardInput v-model="cc" />
       </div>
     </div>
     <div class="row">

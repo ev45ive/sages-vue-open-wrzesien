@@ -3,6 +3,12 @@
     <input type="text" class="form-control" v-model="query" v-bind="$attrs" />
     <!-- :placeholder="attrs['placeholder'] as any || 'Search'" -->
     <button class="btn btn-outline-secondary" @click="send">Search</button>
+
+
+    <input maxlength="4">-<input maxlength="4">-<input maxlength="4">-<input maxlength="4">
+    <input type="text" placeholder="CVV"/>
+
+
   </div>
 </template>
 
