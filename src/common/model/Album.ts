@@ -92,6 +92,9 @@ export interface Track {
     linked_from:       Artist;
     restrictions:      Restrictions;
     name:              string;
+    /**
+     * URL to preview MP3
+     */
     preview_url:       string;
     track_number:      number;
     type:              string;

@@ -32,7 +32,8 @@ import { useAlbumSearch } from "../../common/composables/useAlbumSearch";
 const { push } = useRouter();
 
 const route = useRoute();
-const query = computed(() => String(route.query["q"]));
+const query = computed(() => String(route.query["q"] || ""));
+
 const { data: albums, error } = useAlbumSearch(query);
 
 const search = (q: string) => {

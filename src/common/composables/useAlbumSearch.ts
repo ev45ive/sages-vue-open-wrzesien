@@ -1,8 +1,8 @@
 import { ComputedRef, Ref, computed } from "vue";
 // import { AlbumSearchResponse, PagingObject } from "../model/Album";
-import { useQuery } from "vue-query";
+import { UseQueryReturnType, useQuery } from "vue-query";
 import { musicAPI } from "../services/musicAPI";
-import { AlbumSearchResponse } from "../model/Album";
+import { AlbumResponse, AlbumSearchResponse } from "../model/Album";
 import { AxiosResponse } from "axios";
 
 export function useAlbumSearch(query: Ref<string> | ComputedRef<string>) {
@@ -21,11 +21,16 @@ export function useAlbumSearch(query: Ref<string> | ComputedRef<string>) {
   );
 }
 
-export function useAlbum(id: Ref<string> | ComputedRef<string>) {
+
+export function useAlbum(
+  id: Ref<string> | ComputedRef<string>
+): UseQueryReturnType<AlbumResponse, Error> {
   return useQuery(["albums/details", id], ({ signal }) =>
-    musicAPI.get<AlbumSearchResponse>("albums/" + id, {
-      signal,
-    })
+    musicAPI
+      .get<AlbumResponse>("albums/" + id.value, {
+        signal,
+      })
+      .then((res) => res.data)
   );
 }
 
