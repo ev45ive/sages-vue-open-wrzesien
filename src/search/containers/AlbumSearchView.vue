@@ -21,36 +21,13 @@
   </div>
 </template>
 
-<script lang="ts">
-import { NavigationGuardWithThis } from "vue-router";
-import { useAlbumSearch } from "../../common/composables/useAlbumSearch";
-
-const loader: NavigationGuardWithThis<any> = async (to, _, next) => {
-  let data: any;
-  if (to.query["q"])
-    ({ data } = await musicAPI.get("search", {
-      params: { type: "album", q: to.query["q"] },
-    }));
-
-  next((comp) => {
-    comp.query = String(to.query["q"]);
-    comp.albums = data;
-  });
-};
-
-export default defineComponent({
-  beforeRouteEnter: loader,
-  beforeRouteUpdate: loader,
-});
-</script>
-
 <script setup lang="ts">
 import ResultsGrid from "../components/ResultsGrid.vue";
 import SearchForm from "../components/SearchForm.vue";
 
 import { useRouter, useRoute } from "vue-router";
-import { defineComponent, computed } from "vue";
-import { musicAPI } from "../../common/services/musicAPI";
+import { computed } from "vue";
+import { useAlbumSearch } from "../../common/composables/useAlbumSearch";
 
 const { push } = useRouter();
 
