@@ -25,9 +25,12 @@
 import { NavigationGuardWithThis } from "vue-router";
 
 const loader: NavigationGuardWithThis<any> = async (to, _, next) => {
-  const { data } = await musicAPI.get("search", {
-    params: { type: "album", q: to.query["q"] },
-  });
+  let data: any;
+  if (to.query["q"])
+    ({ data } = await musicAPI.get("search", {
+      params: { type: "album", q: to.query["q"] },
+    }));
+
   next((comp) => {
     comp.query = String(to.query["q"]);
     comp.albums = data;
