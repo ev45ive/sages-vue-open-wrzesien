@@ -21,6 +21,14 @@ export function useAlbumSearch(query: Ref<string> | ComputedRef<string>) {
   );
 }
 
+export function useAlbum(id: Ref<string> | ComputedRef<string>) {
+  return useQuery(["albums/details", id], ({ signal }) =>
+    musicAPI.get<AlbumSearchResponse>("albums/" + id, {
+      signal,
+    })
+  );
+}
+
 // export function useAlbumSearch(query: Ref<string>) {
 //   const params = reactive({ query, type: "album" });
 //   return useFetch<AlbumSearchResponse, { query: string }>("search", params);

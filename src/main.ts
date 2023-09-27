@@ -38,6 +38,7 @@ const router = createRouter({
         },
         {
           path: "albums/:albumId",
+          name: "AlbumDetails",
           component: AlbumDetailsView,
         },
       ],
