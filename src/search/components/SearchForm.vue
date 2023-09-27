@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useAttrs } from "vue";
+import { ref, useAttrs, watch } from "vue";
 import { watchDebounced } from "@vueuse/core";
 
 defineOptions({
@@ -28,10 +28,10 @@ const $emit = defineEmits<{
 
 const query = ref(props.query);
 
-// watch(
-//   () => props.query,
-//   (q) => (query.value = q || "")
-// );
+watch(
+  () => props.query,
+  (q) => (query.value = q || "")
+);
 
 watchDebounced(query, (q) => $emit("search", q), {
   debounce: 500,

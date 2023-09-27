@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row row-cols-1 row-cols-sm-4 g-0">
-      <div class="col" v-for="album of albums">
+      <div class="col" v-for="album of albums" :key="album.id">
         <AlbumCard :album="album" />
       </div>
     </div>
